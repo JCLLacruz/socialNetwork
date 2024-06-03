@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// Default variable overrides
+$primary: #E8B672;
+$secondary: #f6c23e;
+$success: #1cc88a;
+$info: #0585E0;
+$warning: #f6c23e;
+$danger: #e74a3b;
+$light: #f8f9fc;
+$dark: #5a5c69;
+
+
+$theme-colors: (
+	'primary': $primary,
+	'secondary': $secondary,
+	'success': $success,
+	'info': $info,
+	'warning': $warning,
+	'danger': $danger,
+	'light': $light,
+	'dark': $dark,
+);
+
+:root {
+	--bs-blue: #0d6efd;
+	--bs-indigo: #6610f2;
+	--bs-purple: #6f42c1;
+	--bs-pink: #d63384;
+	--bs-red: #dc3545;
+	--bs-orange: #fd7e14;
+	--bs-yellow: #ffc107;
+	--bs-green: #198754;
+	--bs-teal: #20c997;
+	--bs-cyan: #0dcaf0;
+	--bs-white: #fff;
+	--bs-gray: #6c757d;
+	--bs-gray-dark: #343a40;
+	--bs-primary: $primary;
+	--bs-secondary: $secondary;
+	--bs-success: $success;
+	--bs-info: $info;
+	--bs-warning: $warning;
+	--bs-danger: $danger;
+	--bs-light: $light;
+	--bs-dark: $dark;
+	--bs-font-sans-serif: 'Poppins', "Segoe UI", 'Roboto', "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	--bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  }
+
+// Required
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/variables-dark';
+@import '../node_modules/bootstrap/scss/maps';
+@import '../node_modules/bootstrap/scss/mixins';
+@import '../node_modules/bootstrap/scss/root';
+
+// Optional Bootstrap components here
+@import '../node_modules/bootstrap/scss/reboot';
+@import '../node_modules/bootstrap/scss/type';
+// etc
+
+@import '../node_modules/bootstrap/scss/bootstrap';

@@ -16,7 +16,7 @@ export const register = createAsyncThunk(
     'auth/register',
     async (user) => {
         try {
-            retrun await authService.register(user);
+            return await authService.register(user);
         } catch (error) {
             console.error(error);
         }
