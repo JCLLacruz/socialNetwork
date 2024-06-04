@@ -9,6 +9,7 @@ import Home from './views/Home/Home';
 import Profile from './views/Profile/Profile';
 import Header from './views/Header/Header';
 import Footer from './views/Footer/Footer';
+import Post from './Components/Post/Post';
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 					<Route path='/login' element={<Login />} />
 					<Route path='/home' element={<Home />} />
 					<Route path='/profile' element={<Profile />} />
+					<Route path='/createPost' element={<Post />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>
