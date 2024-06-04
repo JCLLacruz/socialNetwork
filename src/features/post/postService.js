@@ -14,7 +14,7 @@ const createPost = async (postData) => {
 };
 const updatePost = async (postData) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.post(API_URL + '/posts/', postData, {
+	const res = await axios.post(API_URL + '/posts', postData, {
 		headers: {
 			Authorization: token,
 		},
