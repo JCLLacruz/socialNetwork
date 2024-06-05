@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { getAllPost } from '../../features/post/postSlice';
+import Post from '../Post/Post';
 
 const Posts = () => {
     const dispatch = useDispatch();
@@ -9,7 +10,9 @@ const Posts = () => {
     },[])
 
   return (
-    <div>Posts</div>
+    <div>
+        <Post/>
+    </div>
   )
 }
 

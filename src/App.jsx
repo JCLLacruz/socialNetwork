@@ -10,6 +10,7 @@ import Profile from './views/Profile/Profile';
 import Header from './views/Header/Header';
 import Footer from './views/Footer/Footer';
 import NewPost from './views/NewPost/NewPost';
+import PostDetail from './views/PostDetail/PostDetail';
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 					<Route path='/home' element={<Home />} />
 					<Route path='/profile' element={<Profile />} />
 					<Route path='/newpost' element={<NewPost />} />
+					<Route path='/postdetail' element={<PostDetail />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>
