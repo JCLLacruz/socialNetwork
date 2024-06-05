@@ -2,7 +2,8 @@
 
 #headerDiv{
     display: flex;
-    position: fixed;
+    position: sticky;
+    top: 0;
     justify-content: space-between;
     width: 100%;
     align-items: center;

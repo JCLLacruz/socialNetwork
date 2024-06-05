@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom';
 
 const Post = () => {
 	const { posts } = useSelector((state) => state.post);
-
+console.log(posts);
 	return <div>
         {posts.map((post)=> {
             return (
-                <div key={post._id}>
-                    <p>{post.title}</p>
-                    <Link to={'/postdetail/' + post.id}/>
+                <Link to={'/postdetail/' + post._id}>
+                <div key={post._id}>        
+                    <h2>{post.title}</h2>
+                    <p>{post.body}</p>
                 </div>
+                </Link>
             )
         })}
     </div>;
