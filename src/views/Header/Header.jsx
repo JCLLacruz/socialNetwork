@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
+import { logout} from '../../features/auth/authSlice'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.scss'
 
 const Header = () => {
   const {token} = useSelector((state)=>state.auth) //login worked
-  const logout = (e)=>{
+  const dispatch = useDispatch()
+  const logoutBtn = (e)=>{
     e.preventDefoult
-    console.log('logout function : ', 'here comes the log out function')
+    dispatch(logout())
   }
 
   return (
@@ -17,7 +19,7 @@ const Header = () => {
       {token.length != 0 ?
         <>
           <Link className="btn btn-primary" to="/profile">Profile</Link>
-          <button className='btn btn-primary' onClick={logout}>Logout</button>
+          <button className='btn btn-primary' onClick={logoutBtn}>Logout</button>
         </>
         :
         <>
