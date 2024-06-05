@@ -25,6 +25,7 @@ const Login = () => {
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(login(formData))
+        navigate("/home")
     }
   return (
     <Form onSubmit={onSubmit}>
