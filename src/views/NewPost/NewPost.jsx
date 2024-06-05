@@ -30,15 +30,14 @@ const Post = () => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
-		formData.append('image', file);
 		formData.append('tilte', title);
 		formData.append('body', body);
-		formData.append('categoryId', e.target.categoryId.value);
+		formData.append('image', file);
 		dispatch(createPost(formData));
 	};
 
 	return (
-		<div>
+		<div id='newPostDiv'>
 			<form onSubmit={onSubmit}>
 				<div className='d-flex justify-content-between'>
 					<label htmlFor='titleInput'>Title: </label>
