@@ -1,31 +1,31 @@
 import React from 'react';
 import { Link} from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Header.scss'
 
 const Header = () => {
+  const {token} = useSelector((state)=>state.auth) //login worked
+  const logout = (e)=>{
+    e.preventDefoult
+    console.log('logout function : ', 'here comes the log out function')
+  }
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/"><span className="badge text-bg-secondary">Happy Network</span></Link>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/home">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/profile">Profile</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/login">Login</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/register">Register</Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div className="d-flex justify-content-around" id="headerDiv">
+      <Link className="btn btn-primary" to="/home"><span>Home</span></Link>
+      {token.length != 0 ?
+        <>
+          <Link className="btn btn-primary" to="/profile">Profile</Link>
+          <button className='btn btn-primary' onClick={logout}>Logout</button>
+        </>
+        :
+        <>
+          <Link className="btn btn-primary" to="/login">Login</Link>
+          <Link className="btn btn-primary" to="/register">Register</Link>
+        </> 
+        }
+    </div>
   );
 }
 

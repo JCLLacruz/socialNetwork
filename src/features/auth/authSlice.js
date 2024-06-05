@@ -5,15 +5,52 @@ const token = localStorage.getItem("token") || "";
 const user = JSON.parse(localStorage.getItem("user")) || null;
 
 const initialState = {
-    user: null,
-    token: '',
+    user: user,
+    token: token,
+    isError: false,
+    isSuccess: false,
+    message: "",
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {}
+    reducers: {
+        reset: (state) => {
+          state.isError = false;
+          state.isSuccess = false;
+          state.message = "";
+        },
+      },
+      extraReducers: (builder) => {
+        builder
+          .addCase(login.fulfilled, (state, action) => {
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            state.message = action.payload.message;
+            state.isSuccess = true
+          })
+          .addCase(login.rejected,(state,action)=>{
+            state.message = action.payload
+            state.isError = true
+          })
+        //   .addCase(logout.fulfilled, (state) => {
+        //     state.user = null;
+        //     state.token = "";
+        //   })
+          .addCase(register.fulfilled, (state, action) => {
+            state.isSuccess = true;
+            state.message = action.payload.msg;
+          })
+          .addCase(register.rejected, (state, action) => {
+            state.isSuccess = false;
+            state.isError = true;
+            state.message = action.payload;
+          });
+      },
 });
+
+
 
 export const register = createAsyncThunk(
     'auth/register',
