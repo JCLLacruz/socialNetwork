@@ -32,7 +32,7 @@ const Post = () => {
 		const formData = new FormData();
 		formData.append('title', title);
 		formData.append('body', body);
-		formData.append('image', file);
+		formData.append('postImg', file);
 		dispatch(createPost(formData));
 	};
 

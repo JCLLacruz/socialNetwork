@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const Post = () => {
 	const { posts } = useSelector((state) => state.post);
-console.log(posts);
 	return <div>
         {posts.map((post)=> {
             return (

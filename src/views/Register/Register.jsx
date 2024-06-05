@@ -16,8 +16,6 @@ const Register = () => {
 
 	const { username, birthday, firstname, lastname, email, password } = formData;
 
-	console.log(formData);
-
 	const dispatch = useDispatch();
 
 	const onChange = (e) => {

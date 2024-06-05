@@ -13,7 +13,6 @@ const getAllPost = async () => {
 	return res.data;
 };
 const getPostById = async (id) => {
-	console.log('get',id);
 	const token = localStorage.getItem('token');
 	const res = await axios.get(API_URL + '/posts/id/' + id,{
 		headers: {
@@ -25,7 +24,6 @@ const getPostById = async (id) => {
 };
 const createPost = async (postData) => {
 	const token = localStorage.getItem('token');
-	console.log(postData);
 	const res = await axios.post(API_URL + '/posts/', postData,{
 		headers: {
 			Authorization: token,
