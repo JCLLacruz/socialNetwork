@@ -34,7 +34,7 @@ const updatePost = async (postData) => {
 };
 
 const postService = {
-	getAllPost
+	getAllPost,
 	createPost,
     updatePost,
 };

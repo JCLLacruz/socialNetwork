@@ -33,7 +33,7 @@ const Register = () => {
 		dispatch(register(formData));
 	};
 	return (
-		<div id='registerDiv' onSubmit={onSubmit} >
+		<div id='registerDiv'>
 			<form className='d-flex flex-column' onSubmit={onSubmit}>
 				<div className='d-flex justify-content-between'>
 					<label htmlFor='firstnameInput'>Username: </label>
