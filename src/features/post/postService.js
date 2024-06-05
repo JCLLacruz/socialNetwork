@@ -2,9 +2,19 @@ import axios from 'axios';
 
 const API_URL = 'https://serversocialnetwork.onrender.com';
 
-const createPost = async (postData) => {
+const getAllPost = async () => {
 	const token = localStorage.getItem('token');
 	const res = await axios.post(API_URL + '/posts/', postData,{
+		headers: {
+			Authorization: token,
+		},
+	}
+);
+	return res.data;
+};
+const createPost = async (postData) => {
+	const token = localStorage.getItem('token');
+	const res = await axios.get(API_URL + '/posts/', postData,{
 		headers: {
 			Authorization: token,
 		},
@@ -24,6 +34,7 @@ const updatePost = async (postData) => {
 };
 
 const postService = {
+	getAllPost
 	createPost,
     updatePost,
 };

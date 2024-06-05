@@ -53,7 +53,7 @@ const Login = () => {
       />
     </Form.Group>
 
-    <Button variant="warning" type="submit">
+    <Button  type="submit" className='btn btn-primary'>
       Login
     </Button>
   </Form>

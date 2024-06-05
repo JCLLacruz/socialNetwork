@@ -1,12 +1,14 @@
 import React from 'react'
-import Post from '../../Components/Post/Post'
 import { Link } from 'react-router-dom'
+import './Footer.scss'
+import {PlusSquareOutlined, UserOutlined } from '@ant-design/icons'
 
 const Footer = () => {
 
   return (
-    <div>
-      <Link to='/createpost'>New Post</Link>
+    <div id='footerDiv'>
+      <Link to='/newpost'><PlusSquareOutlined style={{ fontSize: '2em' }}/></Link>
+      <Link to='/profile'><UserOutlined style={{ fontSize: '2em' }}/></Link>
     </div>
   )
 }
