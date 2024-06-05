@@ -39,7 +39,7 @@ const Profile = () => {
         </div>
         <div className="row mt-5">
           <div className="col">
-            <Link className="btn btn-primary" to="/EditProfile">Edit Profile</Link>
+            <Link className="btn btn-primary" to="/editprofile">Edit Profile</Link>
           </div>
           <div className="col">
             <span>SHARE PROF</span>
