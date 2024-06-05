@@ -1,4 +1,11 @@
 @import "../../custom.scss" ;
+
 #headerDiv{
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    height: 3rem;
     background-color: $dark;
 }

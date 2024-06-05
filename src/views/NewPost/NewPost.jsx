@@ -30,7 +30,7 @@ const Post = () => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
-		formData.append('tilte', title);
+		formData.append('title', title);
 		formData.append('body', body);
 		formData.append('image', file);
 		dispatch(createPost(formData));
