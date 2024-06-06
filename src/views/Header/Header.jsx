@@ -15,8 +15,7 @@ const Header = () => {
   }
 
   return (
-    <div className="d-flex" id="headerDiv">
-      <Link className="btn btn-primary ms-2" to="/home"><span>Home</span></Link>
+    <div className="d-flex justify-content-end" id="headerDiv">
       {token.length != 0 ?
         <>
           <Link className='me-2'><PoweroffOutlined onClick={logoutBtn} style={{ fontSize: '2em' }}/></Link>
