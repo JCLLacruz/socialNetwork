@@ -1,0 +1,13 @@
+@import '../../custom.scss';
+
+.postContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    width: 90%;
+    margin-top: 1rem;
+}
+
+.post {
+    width: 32.90%;
+}

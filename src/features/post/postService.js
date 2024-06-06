@@ -22,6 +22,16 @@ const getPostById = async (id) => {
 );
 	return res.data;
 };
+const getPostsByTitle = async (title) => {
+	const token = localStorage.getItem('token');
+	const res = await axios.get(API_URL + '/posts/title/' + title,{
+		headers: {
+			Authorization: token,
+		},
+	}
+);
+	return res.data;
+};
 const createPost = async (postData) => {
 	const token = localStorage.getItem('token');
 	const res = await axios.post(API_URL + '/posts/', postData,{
@@ -48,6 +58,7 @@ const postService = {
 	createPost,
     updatePost,
 	getPostById,
+	getPostsByTitle,
 };
 
 export default postService;
