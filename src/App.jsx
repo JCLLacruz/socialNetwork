@@ -11,12 +11,15 @@ import PostDetail from './views/PostDetail/PostDetail';
 import { useSelector } from 'react-redux';
 import { EditProfile } from './views/EditProfile/EditProfile';
 import Search from './views/Search/Search';
+import Comments from './views/Comments/Comments';
+import PrivateZone from './guards/PrivateZone';
 
 function App() {
-	const {user} = useSelector((state) => state.auth);
+	const { user } = useSelector((state) => state.auth);
 	return (
 		<>
 			<BrowserRouter>
+<<<<<<< HEAD
 			{!user ?
 			<>
 			<Login />
@@ -36,6 +39,69 @@ function App() {
 				<Footer />
 			</>
 			}
+=======
+				{!user ? (
+					<>
+						<Login />
+					</>
+				) : (
+					<>
+						<Header />
+						<Routes>
+							<Route path='/register' element={<Register />} />
+							<Route
+								path='/search'
+								element={
+									<PrivateZone>
+										<Search />
+									</PrivateZone>
+								}
+							/>
+							<Route
+								path='/comments'
+								element={
+									<PrivateZone>
+										<Comments />
+									</PrivateZone>
+								}
+							/>
+							<Route
+								path='/home'
+								element={
+									<PrivateZone>
+										<Home />
+									</PrivateZone>
+								}
+							/>
+							<Route
+								path='/profile'
+								element={
+									<PrivateZone>
+										<Profile />
+									</PrivateZone>
+								}
+							/>
+							<Route
+								path='/newpost'
+								element={
+									<PrivateZone>
+										<NewPost />
+									</PrivateZone>
+								}
+							/>
+							<Route
+								path='/postdetail/id/:id'
+								element={
+									<PrivateZone>
+										<PostDetail />
+									</PrivateZone>
+								}
+							/>
+						</Routes>
+						<Footer />
+					</>
+				)}
+>>>>>>> juancarlos
 			</BrowserRouter>
 		</>
 	);

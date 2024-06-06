@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../../features/auth/authSlice';
+import './Register.scss'
 
 const Register = () => {
 	const initialValues = {
@@ -15,8 +16,6 @@ const Register = () => {
 	const [formData, setFormdata] = useState(initialValues);
 
 	const { username, birthday, firstname, lastname, email, password } = formData;
-
-	console.log(formData);
 
 	const dispatch = useDispatch();
 

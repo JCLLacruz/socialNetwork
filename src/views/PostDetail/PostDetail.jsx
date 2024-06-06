@@ -1,20 +1,43 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getPostById } from '../../features/post/postSlice';
+import { Link, useParams } from 'react-router-dom';
+import { getPostById, getPostsByTitle } from '../../features/post/postSlice';
 import Post from '../../Components/Post/Post';
+import { Spin } from 'antd';
+import { CommentOutlined } from '@ant-design/icons';
+import './PostDetail.scss'
 
 const PostDetail = () => {
 	const { id } = useParams();
-  const {post } =useSelector((state) => state.post)
+	const { posts, post, isLoading } = useSelector((state) => state.post);
 	const dispatch = useDispatch();
-	console.log(id);
-	useEffect(() => {
-		dispatch(getPostById(id));
-	},[]);
-	return <div>
-    <h2>{post.title}</h2>
-    </div>;
+	
+  useEffect(() => {
+    dispatch(getPostById(id));
+  }, []);
+
+  if(isLoading) {
+    return <Spin/>
+  }
+	return (
+		<div id='postDetailDiv'>
+    <div className='post-header'>
+        <h2 className='post-title'>{post.title}</h2>
+    </div>
+    {post.image && (
+        <div className='post-image'>
+            <img src={post.image_path != 'nonPostImage'} alt={post.title} />
+        </div>
+    )}
+    <div className='post-body'>
+        <p>{post.body}</p>
+    </div>
+    <div className='post-comments'>
+        <Link to="/comments"><CommentOutlined style={{ fontSize: '2em' }}/></Link>
+    </div>
+</div>
+
+	);
 };
 
 export default PostDetail;

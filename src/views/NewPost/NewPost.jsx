@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createPost } from '../../features/post/postSlice';
+import './NewPost.scss';
 
 const Post = () => {
 	const initialValues = {
@@ -23,35 +24,44 @@ const Post = () => {
 		});
 	};
 
-  const handleFileChange = async (e) => {
-    setFile(e.target.files[0]);
-};
+	const handleFileChange = async (e) => {
+		setFile(e.target.files[0]);
+	};
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append('title', title);
 		formData.append('body', body);
-		formData.append('image', file);
+		formData.append('postImg', file);
 		dispatch(createPost(formData));
 	};
 
 	return (
 		<div id='newPostDiv'>
 			<form onSubmit={onSubmit}>
-				<div className='d-flex justify-content-between'>
+				<h1>New Posst</h1>
+				<div className='d-flex flex-column'>
 					<label htmlFor='titleInput'>Title: </label>
-					<input type='text' id='title' name='title' value={title} onChange={onChange} placeholder='Please insert a title.' />
+					<input className='mt-2' type='text' id='title' name='title' value={title} onChange={onChange} placeholder='Please insert a title.' />
 				</div>
-				<div className='d-flex justify-content-between'>
+				<div className='d-flex flex-column'>
 					<label htmlFor='bodyPost'>Content:</label>
-					<textarea type='email' id='bodyPost' name='body' value={body} onChange={onChange} placeholder='Please insert content.'></textarea>
+					<textarea
+						className='mt-2'
+						type='email'
+						id='bodyPost'
+						name='body'
+						value={body}
+						onChange={onChange}
+						placeholder='Please insert content.'
+					></textarea>
 				</div>
-				<div className='d-flex justify-content-between'>
-					<label htmlFor='titleInput'>Title: </label>
-          <input type="file" name="image" id="" onChange={handleFileChange} />
+				<div className='d-flex flex-column'>
+					<label htmlFor='titleInput'>Post Image</label>
+					<input className='mt-2' type='file' name='image' id='titleInput' onChange={handleFileChange} />
 				</div>
-				<input type='submit' className='btn btn-primary' />
+				<input type='submit' className='btn btn-primary mt-2' value='Send' />
 			</form>
 		</div>
 	);

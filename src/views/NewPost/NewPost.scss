@@ -1,5 +1,52 @@
-@import './NewPost.scss';
-
 #newPostDiv {
-    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#newPostDiv h1 {
+    color: #333333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#newPostDiv label {
+    color: #555555;
+    font-weight: 500;
+}
+
+#newPostDiv input[type="text"],
+#newPostDiv input[type="file"],
+#newPostDiv textarea {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    color: #495057;
+    transition: border-color 0.2s;
+}
+
+#newPostDiv input[type="text"]:focus,
+#newPostDiv input[type="file"]:focus,
+#newPostDiv textarea:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#newPostDiv .btn {
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+#newPostDiv .btn:hover {
+    background-color: #0056b3;
 }

@@ -10,6 +10,17 @@ $danger: #e74a3b;
 $light: #f8f9fc;
 $dark: #5a5c69;
 
+$body-bg: $light;
+$body-color: $dark;
+
+$input-border-color: #ced4da;
+$input-focus-border-color: $info;
+$input-color: #495057;
+
+$btn-primary-bg: $primary;
+$btn-primary-border: $primary;
+$btn-primary-hover-bg: darken($primary, 10%);
+$btn-primary-hover-border: darken($primary, 10%);
 
 $theme-colors: (
 	'primary': $primary,
