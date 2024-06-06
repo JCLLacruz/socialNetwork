@@ -10,6 +10,7 @@ import NewPost from './views/NewPost/NewPost';
 import PostDetail from './views/PostDetail/PostDetail';
 import { useSelector } from 'react-redux';
 import { EditProfile } from './views/EditProfile/EditProfile';
+import Search from './views/Search/Search';
 
 function App() {
 	const {user} = useSelector((state) => state.auth);
@@ -25,11 +26,12 @@ function App() {
 				<Header />
 				<Routes>
 					<Route path='/register' element={<Register />} />
+					<Route path='/search' element={<Search />} />
 					<Route path='/home' element={<Home />} />
 					<Route path='/profile' element={<Profile />} />
 					<Route path='/editprofile' element={<EditProfile />} />
 					<Route path='/newpost' element={<NewPost />} />
-					<Route path='/postdetail' element={<PostDetail />} />
+					<Route path='/postdetail/:id' element={<PostDetail />} />
 				</Routes>
 				<Footer />
 			</>

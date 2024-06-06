@@ -27,6 +27,15 @@ export const postSlice = createSlice({
 				state.message = action.payload.msg;
 				state.isError = true;
 			})
+			.addCase(getPostById.fulfilled, (state, action) => {
+				state.post = action.payload.post;
+				state.message = action.payload.msg;
+				state.isSuccess = true;
+			})
+			.addCase(getPostById.rejected, (state, action) => {
+				state.message = action.payload.msg;
+				state.isError = true;
+			})
 			.addCase(createPost.fulfilled, (state, action) => {
 				state.post = action.payload.post;
 				state.message = action.payload.msg;
@@ -51,6 +60,13 @@ export const postSlice = createSlice({
 export const getAllPost = createAsyncThunk('post/getAllPost', async () => {
 	try {
 		return await postService.getAllPost();
+	} catch (error) {
+		console.error(error);
+	}
+});
+export const getPostById = createAsyncThunk('post/getPostById', async (id) => {
+	try {
+		return await postService.getPostById(id);
 	} catch (error) {
 		console.error(error);
 	}

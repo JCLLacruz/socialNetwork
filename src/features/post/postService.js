@@ -12,6 +12,17 @@ const getAllPost = async () => {
 );
 	return res.data;
 };
+const getPostById = async (id) => {
+	console.log('get',id);
+	const token = localStorage.getItem('token');
+	const res = await axios.get(API_URL + '/posts/id/' + id,{
+		headers: {
+			Authorization: token,
+		},
+	}
+);
+	return res.data;
+};
 const createPost = async (postData) => {
 	const token = localStorage.getItem('token');
 	console.log(postData);
@@ -38,6 +49,7 @@ const postService = {
 	getAllPost,
 	createPost,
     updatePost,
+	getPostById,
 };
 
 export default postService;
