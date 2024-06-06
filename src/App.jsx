@@ -19,27 +19,6 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
-<<<<<<< HEAD
-			{!user ?
-			<>
-			<Login />
-			</> 
-			: 
-			<>
-				<Header />
-				<Routes>
-					<Route path='/register' element={<Register />} />
-					<Route path='/search' element={<Search />} />
-					<Route path='/home' element={<Home />} />
-					<Route path='/profile' element={<Profile />} />
-					<Route path='/editprofile' element={<EditProfile />} />
-					<Route path='/newpost' element={<NewPost />} />
-					<Route path='/postdetail/:id' element={<PostDetail />} />
-				</Routes>
-				<Footer />
-			</>
-			}
-=======
 				{!user ? (
 					<>
 						<Login />
@@ -101,7 +80,6 @@ function App() {
 						<Footer />
 					</>
 				)}
->>>>>>> juancarlos
 			</BrowserRouter>
 		</>
 	);
