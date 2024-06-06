@@ -35,6 +35,7 @@ export const EditProfile = () => {
 		e.preventDefault();
 		dispatch(updateUser(formData));
         navigate("/profile")
+        
     }
 
   return (
@@ -58,7 +59,7 @@ export const EditProfile = () => {
             </div>
             <div>
             <input type="submit" value='Submit' className='btn btn-primary'/>
-            <input type="submit" value='clear' className='btn btn-primary' onClick={()=>setFormdata(initialValues)}/>
+            <span type="button" value='clear' className='btn btn-primary' onClick={()=>setFormdata(initialValues)}>Clear</span>
             </div>
         </form>
     </div>
