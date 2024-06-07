@@ -6,6 +6,7 @@ import './Post.scss'
 const Post = () => {
 	const { posts } = useSelector((state) => state.post);
 	const navigate = useNavigate();
+	console.log(posts);
 	return (
 		<>
 			{posts.map((post) => {

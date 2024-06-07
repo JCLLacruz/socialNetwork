@@ -95,4 +95,6 @@ export const logout = createAsyncThunk("auth/logout", async () => {
     }
 );
 
+export const {reset} = authSlice.actions;
+
 export default authSlice.reducer;

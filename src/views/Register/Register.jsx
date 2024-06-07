@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../../features/auth/authSlice';
-import './Register.scss'
+import './Register.scss';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
 	const initialValues = {
@@ -33,6 +34,7 @@ const Register = () => {
 	};
 	return (
 		<div id='registerDiv'>
+			<h2 className='mb-2'>Register</h2>
 			<form className='d-flex flex-column' onSubmit={onSubmit}>
 				<div className='d-flex justify-content-between'>
 					<label htmlFor='firstnameInput'>Username: </label>
@@ -62,10 +64,16 @@ const Register = () => {
 					<label htmlFor='firstnameInput'>Repeat password: </label>
 					<input type='text' id='repeatPassword' onChange={onChange} placeholder='Please insert your birthday.' />
 				</div>
-                <div>
-                <input type="submit" value='Submit' className='btn btn-primary'/>
-                <input type="submit" value='clear' className='btn btn-primary' onClick={()=>setFormdata(initialValues)}/>
-                </div>
+				<div>
+					<input type='submit' value='Submit' className='btn btn-primary' />
+					<input type='submit' value='clear' className='btn btn-primary' onClick={() => setFormdata(initialValues)} />
+				</div>
+				<div>
+					<h6>Do you have an account?</h6>
+					<Link to='/' type='text'>
+						Register
+					</Link>
+				</div>
 			</form>
 		</div>
 	);

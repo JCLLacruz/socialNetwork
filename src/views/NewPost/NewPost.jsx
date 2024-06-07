@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createPost } from '../../features/post/postSlice';
 import './NewPost.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Post = () => {
 	const initialValues = {
@@ -15,6 +16,7 @@ const Post = () => {
 	const { title, body } = postData;
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const onChange = (e) => {
 		e.preventDefault();
@@ -35,6 +37,7 @@ const Post = () => {
 		formData.append('body', body);
 		formData.append('postImg', file);
 		dispatch(createPost(formData));
+		navigate('/profile')
 	};
 
 	return (
