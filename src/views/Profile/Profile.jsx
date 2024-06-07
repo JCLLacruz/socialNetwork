@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
+import { getPostById} from '../../features/post/postSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Profile = () => {
   const {user} = useSelector((state)=>state.auth)
+  const {post} = useSelector((state) => state.post);
+  const dispatch = useDispatch();
+  //dispatch(getPostById(id));
 
   return (
     <div className='mt-1'>
@@ -45,6 +49,12 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
+      {/* {user.PostIds.map((PostId)=>{
+          //dispatch(getPostById(PostId.PostId))
+          //console.log(PostId.PostId)
+          //console.log(post)
+        })} */}
 
     </div>
   )
