@@ -61,6 +61,14 @@ function App() {
 								}
 							/>
 							<Route
+								path='/editprofile'
+								element={
+									<PrivateZone>
+										<EditProfile />
+									</PrivateZone>
+								}
+							/>
+							<Route
 								path='/newpost'
 								element={
 									<PrivateZone>

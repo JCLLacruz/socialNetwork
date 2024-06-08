@@ -53,12 +53,24 @@ const updatePost = async (postData) => {
 	return res.data;
 };
 
+const getUserPosts = async () => {
+	const token = localStorage.getItem('token');
+	const res = await axios.get(API_URL + '/posts/userposts',{
+		headers: {
+			Authorization: token,
+		},
+	}
+);
+	return res.data;
+};
+
 const postService = {
 	getAllPost,
 	createPost,
     updatePost,
 	getPostById,
 	getPostsByTitle,
+	getUserPosts
 };
 
 export default postService;

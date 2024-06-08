@@ -6,6 +6,7 @@ const token = localStorage.getItem('token');
 const initialState = {
 	post: null,
 	posts: [],
+	userPosts:[],
 	token: '',
 	isSuccess: false,
 	message: '',
@@ -72,6 +73,10 @@ export const postSlice = createSlice({
 			.addCase(updatePost.rejected, (state, action) => {
 				state.message = action.payload.msg;
 				state.isError = true;
+			})
+			.addCase(getUserPosts.fulfilled, (state, action) => {
+				state.message = action.payload.msg;
+				state.userPosts = action.payload.posts;
 			});
 	},
 });
@@ -107,6 +112,14 @@ export const createPost = createAsyncThunk('post/createPost', async (post) => {
 export const updatePost = createAsyncThunk('post/updatePost', async (post) => {
 	try {
 		return await postService.updatePost(post);
+	} catch (error) {
+		console.error(error);
+	}
+});
+
+export const getUserPosts = createAsyncThunk('post/userPosts', async () => {
+	try {
+		return await postService.getUserPosts();
 	} catch (error) {
 		console.error(error);
 	}
