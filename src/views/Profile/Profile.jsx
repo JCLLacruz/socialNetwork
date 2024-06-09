@@ -56,7 +56,7 @@ const Profile = () => {
      
      <div className='mt-5 container text-center'> 
       {userPosts.length != 0 && userPosts.map((post,i)=>{
-        //console.log('test: ',post.title)
+        console.log('test: ',post)
         return (
         <>
         {(i+1)%3 == 0 &&  
