@@ -3,80 +3,120 @@ import { useDispatch } from 'react-redux';
 import { register } from '../../features/auth/authSlice';
 import './Register.scss';
 import { Link } from 'react-router-dom';
+import { Form, Input, Button, DatePicker } from 'antd';
 
 const Register = () => {
-	const initialValues = {
-		username: '',
-		birthday: '',
-		firstname: '',
-		lastname: '',
-		email: '',
-		Password: '',
-	};
+    const initialValues = {
+        username: '',
+        birthday: null,
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        repeatPassword: '',
+    };
 
-	const [formData, setFormdata] = useState(initialValues);
+    const [formData, setFormData] = useState(initialValues);
+    const dispatch = useDispatch();
 
-	const { username, birthday, firstname, lastname, email, password } = formData;
+    const onFinish = () => {
+        const transformedValues = {
+            ...formData,
+            birthday: formData.birthday ? formData.birthday.format('YYYY-MM-DD') : ''
+        };
+        dispatch(register(transformedValues));
+    };
 
-	const dispatch = useDispatch();
+    const onValuesChange = (changedValues, allValues) => {
+        setFormData(allValues);
+    };
 
-	const onChange = (e) => {
-		e.preventDefault();
-		setFormdata({
-			...formData,
-			[e.target.name]: e.target.value,
-		});
-	};
-
-	const onSubmit = (e) => {
-		e.preventDefault();
-		dispatch(register(formData));
-	};
-	return (
-		<div id='registerDiv'>
-			<h2 className='mb-2'>Register</h2>
-			<form className='d-flex flex-column' onSubmit={onSubmit}>
-				<div className='d-flex justify-content-between'>
-					<label htmlFor='firstnameInput'>Username: </label>
-					<input type='text' id='firstnameInput' name='username' value={username} onChange={onChange} placeholder='Please insert your username.' />
-				</div>
-				<div className='d-flex justify-content-between'>
-					<label htmlFor='emailInput'>Email:</label>
-					<input type='email' id='emailInput' name='email' value={email} onChange={onChange} placeholder='Please insert your email.' />
-				</div>
-				<div className='d-flex justify-content-between'>
-					<label htmlFor='firstnameInput'>Firstname: </label>
-					<input type='text' id='firstnameInput' name='firstname' value={firstname} onChange={onChange} placeholder='Please insert your firstname.' />
-				</div>
-				<div className='d-flex justify-content-between'>
-					<label htmlFor='firstnameInput'>Lastname: </label>
-					<input type='text' id='firstnameInput' name='lastname' value={lastname} onChange={onChange} placeholder='Please insert your lastname.' />
-				</div>
-				<div className='d-flex justify-content-between'>
-					<label htmlFor='firstnameInput'>Birthday: </label>
-					<input type='date' id='firstnameInput' name='birthday' value={birthday} onChange={onChange} placeholder='Please insert your birthday.' />
-				</div>
-				<div className='d-flex justify-content-between'>
-					<label htmlFor='firstnameInput'>Password: </label>
-					<input type='text' id='password' name='password' value={password} onChange={onChange} placeholder='Please insert your birthday.' />
-				</div>
-				<div className='d-flex justify-content-between'>
-					<label htmlFor='firstnameInput'>Repeat password: </label>
-					<input type='text' id='repeatPassword' onChange={onChange} placeholder='Please insert your birthday.' />
-				</div>
-				<div>
-					<input type='submit' value='Submit' className='btn btn-primary' />
-					<input type='submit' value='clear' className='btn btn-primary' onClick={() => setFormdata(initialValues)} />
-				</div>
-				<div>
-					<h6>Do you have an account?</h6>
-					<Link to='/' type='text'>
-						Register
-					</Link>
-				</div>
-			</form>
-		</div>
-	);
+    return (
+        <div id='registerDiv'>
+            <h2 className='mb-2'>Register</h2>
+            <Form
+                layout='vertical'
+                onFinish={onFinish}
+                initialValues={formData}
+                onValuesChange={onValuesChange}
+            >
+                <Form.Item
+                    label='Username'
+                    name='username'
+                    rules={[{ required: true, message: 'Please insert your username.' }]}
+                >
+                    <Input value={formData.username} placeholder='Please insert your username.' />
+                </Form.Item>
+                <Form.Item
+                    label='Email'
+                    name='email'
+                    rules={[{ required: true, type: 'email', message: 'Please insert a valid email.' }]}
+                >
+                    <Input value={formData.email} placeholder='Please insert your email.' />
+                </Form.Item>
+                <Form.Item
+                    label='Firstname'
+                    name='firstname'
+                    rules={[{ required: true, message: 'Please insert your firstname.' }]}
+                >
+                    <Input value={formData.firstname} placeholder='Please insert your firstname.' />
+                </Form.Item>
+                <Form.Item
+                    label='Lastname'
+                    name='lastname'
+                    rules={[{ required: true, message: 'Please insert your lastname.' }]}
+                >
+                    <Input value={formData.lastname} placeholder='Please insert your lastname.' />
+                </Form.Item>
+                <Form.Item
+                    label='Birthday'
+                    name='birthday'
+                    rules={[{ required: true, message: 'Please insert your birthday.' }]}
+                >
+                    <DatePicker
+                        value={formData.birthday}
+                        format='YYYY-MM-DD'
+                        onChange={(date) => setFormData({ ...formData, birthday: date })}
+                    />
+                </Form.Item>
+                <Form.Item
+                    label='Password'
+                    name='password'
+                    rules={[{ required: true, message: 'Please insert your password.' }]}
+                    hasFeedback
+                >
+                    <Input.Password value={formData.password} placeholder='Please insert your password.' />
+                </Form.Item>
+                <Form.Item
+                    label='Repeat Password'
+                    name='repeatPassword'
+                    dependencies={['password']}
+                    hasFeedback
+                    rules={[
+                        { required: true, message: 'Please repeat your password.' },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('The two passwords do not match.'));
+                            },
+                        }),
+                    ]}
+                >
+                    <Input.Password value={formData.repeatPassword} placeholder='Please repeat your password.' />
+                </Form.Item>
+                <Form.Item>
+                    <Button type='primary' htmlType='submit'>Submit</Button>
+                    <Button type='default' onClick={() => setFormData(initialValues)}>Clear</Button>
+                </Form.Item>
+                <Form.Item>
+                    <h6>Do you have an account?</h6>
+                    <Link to='/'>Login</Link>
+                </Form.Item>
+            </Form>
+        </div>
+    );
 };
 
 export default Register;

@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'https://serversocialnetwork.onrender.com/posts/';
+const API_URL = 'https://serversocialnetwork.onrender.com/comment/';
 
-const getAllPost = async () => {
+const getAllComments = async () => {
 	const token = localStorage.getItem('token');
-	const res = await axios.get(API_URL,{
+	const res = await axios.get(API_URL + '/',{
 		headers: {
 			Authorization: token,
 		},
@@ -12,7 +12,7 @@ const getAllPost = async () => {
 );
 	return res.data;
 };
-const getPostById = async (id) => {
+const getCommentById = async (id) => {
 	const token = localStorage.getItem('token');
 	const res = await axios.get(API_URL + 'id/' + id,{
 		headers: {
@@ -22,17 +22,7 @@ const getPostById = async (id) => {
 );
 	return res.data;
 };
-const getPostsByTitle = async (title) => {
-	const token = localStorage.getItem('token');
-	const res = await axios.get(API_URL + 'title/' + title,{
-		headers: {
-			Authorization: token,
-		},
-	}
-);
-	return res.data;
-};
-const createPost = async (postData) => {
+const createComment = async (postData) => {
 	const token = localStorage.getItem('token');
 	const res = await axios.post(API_URL, postData,{
 		headers: {
@@ -42,9 +32,9 @@ const createPost = async (postData) => {
 );
 	return res.data;
 };
-const updatePost = async (postData) => {
+const updateComment = async (postData) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.post(API_URL + 'id/' + postData._id, postData, {
+	const res = await axios.post(API_URL + 'id/'+postData._id, postData, {
 		headers: {
 			Authorization: token,
 		},
@@ -54,11 +44,10 @@ const updatePost = async (postData) => {
 };
 
 const postService = {
-	getAllPost,
-	createPost,
-    updatePost,
-	getPostById,
-	getPostsByTitle,
+    createComment,
+    getAllComments,
+    getCommentById,
+    updateComment,
 };
 
 export default postService;

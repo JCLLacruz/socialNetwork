@@ -12,23 +12,22 @@ const Login = () => {
 		password: '',
 	});
 	const { email, password } = formData;
-	const { message, isSuccess, isError } = useSelector((state) => state.auth);
+	const { message, isSuccess, isError, user } = useSelector((state) => state.auth);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-  useEffect(()=> {
-    if (isError) {
-      notification.error({  message: "Error", description: message });
-    }
-    if (isSuccess) {
-      notification.success({  message: "Success", description: message });
-      setTimeout(() => {
-        navigate("/profile");
-      }, 2000);
-    }
-    dispatch(reset());
-  },[isSuccess, isError, message])
+	useEffect(() => {
+		console.log(isSuccess);
+		if (isError) {
+			notification.error({ message: 'Error', description: message });
+		}
+		if (isSuccess) {
+			notification.success({ message: 'Success', description: message });
+			setTimeout(() => {}, 2000);
+		}
+		dispatch(reset());
+	}, [isSuccess, isError, message]);
 
 	const onChange = (e) => {
 		setFormData({
@@ -43,8 +42,8 @@ const Login = () => {
 	};
 	return (
 		<div id='loginDiv' className='d-flex flex-column justify-content-center'>
+			<img src='src\assets\images\icons\logoImg.jpg' />
 			<Form onSubmit={onSubmit} className='d-flex flex-column justify-content-center align-items-center'>
-      <img src='src\assets\images\icons\logoImg.jpg'/>
 				<h2>Login</h2>
 				<div>
 					<Form.Group controlId='formBasicEmail'>
@@ -55,18 +54,18 @@ const Login = () => {
 
 					<Form.Group controlId='formBasicPassword'>
 						<Form.Label>Password</Form.Label>
-						<Form.Control type='password' name='password' value={password} onChange={onChange} placeholder='Password' autoComplete='true'/>
+						<Form.Control type='password' name='password' value={password} onChange={onChange} placeholder='Password' autoComplete='true' />
 					</Form.Group>
 
 					<Button type='submit' className='btn btn-primary mt-2'>
 						Login
 					</Button>
-          <div>
-					<h6>Don't have an account?</h6>
-					<Link to='/register' type='text'>
-						Register
-					</Link>
-          </div>
+					<div>
+						<h6>Don't have an account?</h6>
+						<Link to='/register' type='text'>
+							Register
+						</Link>
+					</div>
 				</div>
 			</Form>
 		</div>

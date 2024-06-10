@@ -6,7 +6,7 @@ const token = localStorage.getItem('token');
 const initialState = {
 	post: null,
 	posts: [],
-	token: '',
+	token,
 	isSuccess: false,
 	message: '',
 	isError: false,

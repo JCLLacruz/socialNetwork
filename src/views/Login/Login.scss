@@ -2,6 +2,9 @@
 
 #loginDiv {
     background-color: $primary;
+    img {
+        width: 100%;
+    }
 }
 Form {
 	padding: 1rem;
