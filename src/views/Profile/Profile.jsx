@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserPosts } from '../../features/post/postSlice';
 import { userInfo } from '../../features/auth/authSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SinglePost from '../SinglePost/SinglePost';
 import './Profile.scss';
 import Post from '../../Components/Post/Post';
 
