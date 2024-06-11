@@ -8,8 +8,7 @@ import Comment from '../../Components/Comment/Comment';
 const Comments = () => {
 	const { user } = useSelector((state) => state.auth);
 	const { post } = useSelector((state) => state.post);
-
-console.log('post', post);
+	const { comment } = useSelector((state) => state.comment);
 
   const dispatch = useDispatch();
 
@@ -20,7 +19,6 @@ console.log('post', post);
   const onValuesChange = (changedValues, allValues) => {
     setFormData(allValues);
 };
-console.log(formData);
 const onFinish = ()=>{
   dispatch(createComment({...formData,PostId: post._id},));
 }

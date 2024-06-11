@@ -34,7 +34,7 @@ const Post = () => {
 		const formData = new FormData();
 		formData.append('title', title);
 		formData.append('body', body);
-		formData.append('postImg', file);
+		formData.append('image_path', file);
 		dispatch(createPost(formData));
 		navigate("/profile")
 	};

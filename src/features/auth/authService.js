@@ -8,7 +8,6 @@ const register = async (userData) => {
 };
 
 const login = async(userData)=>{
-  console.log('service', userData);
     const res = await axios.post(API_URL + '/users/login',userData)
     if (res.data) {
         localStorage.setItem("user", JSON.stringify(res.data.user));

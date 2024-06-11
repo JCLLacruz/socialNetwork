@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux'
 const Comment = () => {
   const {user} =useSelector(state => state.auth);
   const {post} = useSelector(state => state.post);
-
-console.log('post en comment', post);
   
   return (
     <div>

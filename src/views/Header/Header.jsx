@@ -20,10 +20,8 @@ const Header = () => {
   },[])
 
   return (
-    <div className="d-flex" id="headerDiv">
-      {token.length != 0 &&
+    <div className="d-flex justify-content-end" id="headerDiv">
           <Link className='me-2'><PoweroffOutlined onClick={logoutBtn} style={{ fontSize: '2em' }}/></Link>
-        }
     </div>
   );
 }

@@ -18,8 +18,6 @@ export const EditProfile = () => {
 
 	const { username, birthday, firstname, lastname} = formData;
 
-	console.log(formData);
-
 	const dispatch = useDispatch();
     const navigate = useNavigate()
 

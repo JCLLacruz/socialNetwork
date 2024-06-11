@@ -70,7 +70,6 @@ export const getCommentById = createAsyncThunk('comment/getCommentById', async (
 });
 export const createComment = createAsyncThunk('comment/createComment', async (comment) => {
 	try {
-        console.log('slice',comment);
 		return await commentService.createComment(comment);
 	} catch (error) {
 		console.error(error);

@@ -18,14 +18,11 @@ const Login = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log(isSuccess);
+		if (isError) {
+			notification.error({ message: 'Error', description: message });
+			dispatch(reset());
+		}
 		return () => {
-			console.log('entras');
-			if (isError) {
-				console.log('isSuccess');
-				notification.error({ message: 'Error', description: message });
-				dispatch(reset());
-			}
 			if (isSuccess) {
 				notification.success({ message: 'Success', description: message });
 				navigate('/home');

@@ -11,20 +11,13 @@ import Comment from '../../Components/Comment/Comment';
 const PostDetail = () => {
 	const { id } = useParams();
 	const { posts, post, isLoading } = useSelector((state) => state.post);
-	const dispatch = useDispatch();
-
-	console.log('post',post);
-	console.log('post',posts);
-
-  useEffect(() => {
-    dispatch(getPostById(id));
-  }, []);
 
   if(isLoading) {
     return <div id='spinDiv' className='d-flex justify-content-center align-items-center'>
       <Spin/>
       </div>
   }
+
 	return (
 		<div id='postDetailDiv'>
     <div className='post-header'>
