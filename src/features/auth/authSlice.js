@@ -52,6 +52,10 @@ export const authSlice = createSlice({
             state.message = action.payload.msg;
             state.isSuccess = true
           })
+          .addCase(userInfo.fulfilled, (state, action) => {
+            state.user = action.payload.user;
+            state.isSuccess = true
+          })
           ;
       },
 });
@@ -92,7 +96,18 @@ export const logout = createAsyncThunk("auth/logout", async () => {
         } catch (error) {
             console.error(error);
         }
-    }
+    });
+    export const userInfo = createAsyncThunk(
+      'auth/userinfo',
+      async (user) => {
+          try {
+            console.log('userInfo is happening')
+              return await authService.userInfo();
+          } catch (error) {
+              console.error(error);
+          }
+      }
+
 );
 
 export default authSlice.reducer;

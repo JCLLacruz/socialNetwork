@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link} from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserPosts} from '../../features/post/postSlice';
+import { userInfo} from '../../features/auth/authSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SinglePost from '../SinglePost/SinglePost';
 
@@ -9,8 +10,12 @@ const Profile = () => {
   const {user} = useSelector((state)=>state.auth)
   const {userPosts} = useSelector((state) => state.post);
   const dispatch = useDispatch();
+  const location = useLocation();
    useEffect(() => {
-     dispatch(getUserPosts());
+    dispatch(userInfo());
+    setTimeout(() => {
+    dispatch(getUserPosts());
+    }, 1000);
   }, []);
 
   return (
