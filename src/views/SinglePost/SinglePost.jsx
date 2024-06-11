@@ -6,7 +6,7 @@ const SinglePost = (post) => {
     const navigate = useNavigate();
     return (
         <div className='col'>
-            <div className='post' onClick={() => navigate('/postdetail/id/' + post._id)} key={post._id}>
+            <div onClick={() => navigate('/postdetail/id/' + post._id)} key={post._id}>
                 <div className='post-header'>
                     <h2 className='post-title'>{post.title}</h2>
                 </div>
