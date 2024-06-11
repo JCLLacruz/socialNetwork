@@ -72,11 +72,13 @@ export const register = createAsyncThunk(
         }
     }
 );
-export const login = createAsyncThunk("auth/login", async (user) => {
+export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
     try {
       return await authService.login(user);
     } catch (error) {
       console.error(error);
+      const message = error.response.data.errors[0].msg;
+      thunkAPI.rejectWithValue(message);
     }
   });
 
@@ -96,17 +98,18 @@ export const logout = createAsyncThunk("auth/logout", async () => {
         } catch (error) {
             console.error(error);
         }
-    });
-    export const userInfo = createAsyncThunk(
-      'auth/userinfo',
-      async (user) => {
-          try {
-            console.log('userInfo is happening')
-              return await authService.userInfo();
-          } catch (error) {
-              console.error(error);
-          }
+    }
+);
+export const userInfo = createAsyncThunk(
+  'auth/userinfo',
+  async (user) => {
+      try {
+        console.log('userInfo is happening')
+          return await authService.userInfo();
+      } catch (error) {
+          console.error(error);
       }
+  }
 
 );
 
