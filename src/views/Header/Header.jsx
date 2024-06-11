@@ -15,12 +15,8 @@ const Header = () => {
     e.preventDefoult
     dispatch(logout())
   }
-
   useEffect(()=>{
-    if(!token){
-        return navigate('/')
-
-    }
+        return ()=>  navigate('/')
   },[])
 
   return (

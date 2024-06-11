@@ -19,14 +19,19 @@ const Login = () => {
 
 	useEffect(() => {
 		console.log(isSuccess);
-		if (isError) {
-			notification.error({ message: 'Error', description: message });
-		}
-		if (isSuccess) {
-			notification.success({ message: 'Success', description: message });
-			setTimeout(() => {}, 2000);
-		}
-		dispatch(reset());
+		return () => {
+			console.log('entras');
+			if (isError) {
+				console.log('isSuccess');
+				notification.error({ message: 'Error', description: message });
+				dispatch(reset());
+			}
+			if (isSuccess) {
+				notification.success({ message: 'Success', description: message });
+				navigate('/home');
+				dispatch(reset());
+			}
+		};
 	}, [isSuccess, isError, message]);
 
 	const onChange = (e) => {
@@ -38,7 +43,6 @@ const Login = () => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		dispatch(login(formData));
-		navigate('/home');
 	};
 	return (
 		<div id='loginDiv' className='d-flex flex-column justify-content-center'>

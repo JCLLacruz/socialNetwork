@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://serversocialnetwork.onrender.com/comment/';
+const API_URL = 'https://serversocialnetwork.onrender.com/';
 
 const getAllComments = async () => {
 	const token = localStorage.getItem('token');
@@ -14,7 +14,7 @@ const getAllComments = async () => {
 };
 const getCommentById = async (id) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.get(API_URL + 'id/' + id,{
+	const res = await axios.get(API_URL + 'comments/id/' + id,{
 		headers: {
 			Authorization: token,
 		},
@@ -24,7 +24,7 @@ const getCommentById = async (id) => {
 };
 const createComment = async (postData) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.post(API_URL, postData,{
+	const res = await axios.post(API_URL + 'comments/', postData,{
 		headers: {
 			Authorization: token,
 		},
@@ -34,7 +34,7 @@ const createComment = async (postData) => {
 };
 const updateComment = async (postData) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.post(API_URL + 'id/'+postData._id, postData, {
+	const res = await axios.post(API_URL + 'comments/id/'+postData._id, postData, {
 		headers: {
 			Authorization: token,
 		},

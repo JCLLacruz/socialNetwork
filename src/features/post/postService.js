@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'https://serversocialnetwork.onrender.com/posts/';
+const API_URL = 'https://serversocialnetwork.onrender.com/';
 
 const getAllPost = async () => {
 	const token = localStorage.getItem('token');
-	const res = await axios.get(API_URL,{
+	const res = await axios.get(API_URL + 'posts/',{
 		headers: {
 			Authorization: token,
 		},
@@ -14,7 +14,7 @@ const getAllPost = async () => {
 };
 const getPostById = async (id) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.get(API_URL + 'id/' + id,{
+	const res = await axios.get(API_URL + 'posts/id/' + id,{
 		headers: {
 			Authorization: token,
 		},
@@ -24,7 +24,7 @@ const getPostById = async (id) => {
 };
 const getPostsByTitle = async (title) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.get(API_URL + 'title/' + title,{
+	const res = await axios.get(API_URL + 'posts/title/' + title,{
 		headers: {
 			Authorization: token,
 		},
@@ -34,7 +34,7 @@ const getPostsByTitle = async (title) => {
 };
 const createPost = async (postData) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.post(API_URL, postData,{
+	const res = await axios.post(API_URL + 'posts/', postData,{
 		headers: {
 			Authorization: token,
 		},
@@ -44,7 +44,7 @@ const createPost = async (postData) => {
 };
 const updatePost = async (postData) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.post(API_URL + 'id/' + postData._id, postData, {
+	const res = await axios.post(API_URL + 'posts/id/' + postData._id, postData, {
 		headers: {
 			Authorization: token,
 		},

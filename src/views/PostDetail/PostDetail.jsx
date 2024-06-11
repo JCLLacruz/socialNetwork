@@ -6,6 +6,7 @@ import Post from '../../Components/Post/Post';
 import { Spin } from 'antd';
 import { CommentOutlined } from '@ant-design/icons';
 import './PostDetail.scss'
+import Comment from '../../Components/Comment/Comment';
 
 const PostDetail = () => {
 	const { id } = useParams();
@@ -13,7 +14,7 @@ const PostDetail = () => {
 	const dispatch = useDispatch();
 
 	console.log('post',post);
-	console.log('posty',posts);
+	console.log('post',posts);
 
   useEffect(() => {
     dispatch(getPostById(id));

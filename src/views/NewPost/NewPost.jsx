@@ -13,6 +13,8 @@ const Post = () => {
 	const [postData, setPostdata] = useState(initialValues);
 	const [file, setFile] = useState(null);
 
+console.log(postData);
+
 	const { title, body } = postData;
 
 	const dispatch = useDispatch();
@@ -38,6 +40,7 @@ const Post = () => {
 		formData.append('postImg', file);
 		dispatch(createPost(formData));
 		navigate('/profile')
+	console.log('formDataPst',formData);
 	};
 
 	return (

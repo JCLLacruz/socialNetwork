@@ -98,6 +98,7 @@ export const  getPostsByTitle = createAsyncThunk('post/getPostsByTitle', async (
 	}
 });
 export const createPost = createAsyncThunk('post/createPost', async (post) => {
+	console.log(post);
 	try {
 		return await postService.createPost(post);
 	} catch (error) {

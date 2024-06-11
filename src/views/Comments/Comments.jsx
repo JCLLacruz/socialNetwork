@@ -1,21 +1,33 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { createComment } from '../../features/comment/commentSlice';
+import Comment from '../../Components/Comment/Comment';
 
 const Comments = () => {
 	const { user } = useSelector((state) => state.auth);
-  const [formData, setFormData] = useState('');
+	const { post } = useSelector((state) => state.post);
+
+console.log('post', post);
+
+  const dispatch = useDispatch();
+
+  const initialValues ={
+    body: ''
+  }
+  const [formData, setFormData] = useState(initialValues);
   const onValuesChange = (changedValues, allValues) => {
     setFormData(allValues);
 };
+console.log(formData);
 const onFinish = ()=>{
-
+  dispatch(createComment({...formData,PostId: post._id},));
 }
 
 	return (
 		<div>
-			Comments
+			<Comment/>
 			<Form layout='vertical' onFinish={onFinish} initialValues={formData} onValuesChange={onValuesChange} >
 				<Form.Item name='body' rules={[{ required: true, message: 'Please insert your username.' }]} >
           <div className='d-flex'>

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Profile = () => {
   const {user} = useSelector((state)=>state.auth)
-
+console.log(user);
   return (
     <div className='mt-1'>
       <p><br/><br/></p>
