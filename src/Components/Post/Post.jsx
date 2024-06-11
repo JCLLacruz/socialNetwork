@@ -4,8 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Post.scss'
 import { getPostById } from '../../features/post/postSlice';
 
-const Post = (index) => {
-	const { posts } = useSelector((state) => state.post);
+const Post = ({posts}) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const onClick = (id) => {

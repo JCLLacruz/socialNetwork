@@ -5,13 +5,14 @@ import Post from '../Post/Post';
 
 const Posts = () => {
     const dispatch = useDispatch();
+    const { posts } = useSelector((state) => state.post);
     useEffect(()=> {
         dispatch(getAllPost());
     },[])
 
   return (
     <div>
-        <Post/>
+        <Post posts={posts}/>
     </div>
   )
 }

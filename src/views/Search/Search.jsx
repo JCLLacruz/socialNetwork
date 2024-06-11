@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../../Components/Post/Post';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllPost, getPostsByTitle } from '../../features/post/postSlice';
 import './Search.scss'
 
 const Search = () => {
-	const dispatch = useDispatch((state) => state.Post);
+	const dispatch = useDispatch();
+	const {posts} = useSelector((state) => state.post)
 	const [search, setSearch] = useState('');
 
 	const handleSearch = (e) => {
@@ -23,7 +24,7 @@ const Search = () => {
 			<input className='w-100' type='text' name='search' placeholder='Search' onKeyUp={handleSearch} />
       <div className='d-flex justify-content-center'>
 			<div className='postContainer'>
-					<Post className='post'/>
+					<Post className='post' posts={posts}/>
 			</div>
       </div>
 		</>
