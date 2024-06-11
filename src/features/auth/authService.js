@@ -8,13 +8,13 @@ const register = async (userData) => {
 };
 
 const login = async(userData)=>{
+  console.log('service', userData);
     const res = await axios.post(API_URL + '/users/login',userData)
     if (res.data) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("token", res.data.token);       
 }
     return res.data
-
 };
 
 const logout = async () => {
@@ -37,7 +37,6 @@ const logout = async () => {
         Authorization: token,
       }
     });
-    console.log('res.data : ', res.data)
     if (res.data) {   
         localStorage.setItem("user", JSON.stringify(res.data.newUser));
     }

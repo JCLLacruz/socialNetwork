@@ -21,13 +21,15 @@ function App() {
 			<BrowserRouter>
 				{!user ? (
 					<>
-						<Login />
+						<Routes>
+						<Route path='/' element={<Login />}/>
+						<Route path='/register' element={<Register />} />
+						</Routes>
 					</>
 				) : (
 					<>
 						<Header />
 						<Routes>
-							<Route path='/register' element={<Register />} />
 							<Route
 								path='/search'
 								element={

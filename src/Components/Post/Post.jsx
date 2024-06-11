@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import './Post.scss'
 
-const Post = () => {
+const Post = (index) => {
 	const { posts } = useSelector((state) => state.post);
 	const navigate = useNavigate();
+	console.log(posts);
 	return (
 		<>
 			{posts.map((post) => {
