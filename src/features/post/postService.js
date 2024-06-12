@@ -22,6 +22,16 @@ const getPostById = async (id) => {
 );
 	return res.data;
 };
+const deletePost = async (id) => {
+	const token = localStorage.getItem('token');
+	const res = await axios.delete(API_URL + 'posts/id/' + id,{
+		headers: {
+			Authorization: token,
+		},
+	}
+);
+	return res.data;
+};
 const getPostsByTitle = async (title) => {
 	const token = localStorage.getItem('token');
 	const res = await axios.get(API_URL + 'posts/title/' + title,{
@@ -44,7 +54,7 @@ const createPost = async (postData) => {
 };
 const updatePost = async (postData) => {
 	const token = localStorage.getItem('token');
-	const res = await axios.post(API_URL + 'posts/id/' + postData._id, postData, {
+	const res = await axios.put(API_URL + 'posts/id/' + postData._id, postData, {
 		headers: {
 			Authorization: token,
 		},
@@ -70,7 +80,8 @@ const postService = {
     updatePost,
 	getPostById,
 	getPostsByTitle,
-	getUserPosts
+	getUserPosts,
+	deletePost
 };
 
 export default postService;

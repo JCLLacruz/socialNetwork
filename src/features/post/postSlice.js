@@ -74,6 +74,14 @@ export const postSlice = createSlice({
 				state.message = action.payload.msg;
 				state.isError = true;
 			})
+			.addCase(deletePost.fulfilled, (state, action) => {
+				state.message = action.payload.msg;
+				state.isSuccess = true;
+			})
+			.addCase(deletePost.rejected, (state, action) => {
+				state.message = action.payload.msg;
+				state.isError = true;
+			})
 			.addCase(getUserPosts.fulfilled, (state, action) => {
 				state.message = action.payload.msg;
 				state.userPosts = action.payload.posts;
@@ -109,9 +117,16 @@ export const createPost = createAsyncThunk('post/createPost', async (post) => {
 		console.error(error);
 	}
 });
-export const updatePost = createAsyncThunk('post/updatePost', async (post) => {
+export const updatePost = createAsyncThunk('post/updatePost', async (postData) => {
 	try {
-		return await postService.updatePost(post);
+		return await postService.updatePost(postData);
+	} catch (error) {
+		console.error(error);
+	}
+});
+export const deletePost = createAsyncThunk('post/deletePost', async (id) => {
+	try {
+		return await postService.deletePost(id);
 	} catch (error) {
 		console.error(error);
 	}

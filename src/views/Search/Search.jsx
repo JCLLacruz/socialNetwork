@@ -3,11 +3,16 @@ import Post from '../../Components/Post/Post';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPost, getPostsByTitle } from '../../features/post/postSlice';
 import './Search.scss'
+import { Spin } from 'antd';
 
 const Search = () => {
 	const dispatch = useDispatch();
-	const {posts} = useSelector((state) => state.post)
+	const {posts, isLoading} = useSelector((state) => state.post)
 	const [search, setSearch] = useState('');
+
+if (isLoading){
+	return <Spin/>
+}
 
 	const handleSearch = (e) => {
 		setSearch(e.target.value);

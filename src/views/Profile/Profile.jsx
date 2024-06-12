@@ -9,14 +9,13 @@ import Post from '../../Components/Post/Post';
 
 const Profile = () => {
 	const { user } = useSelector((state) => state.auth);
-	const { userPosts } = useSelector((state) => state.post);
 	const dispatch = useDispatch();
 	const location = useLocation();
+
+console.log(user);
+
 	useEffect(() => {
 		dispatch(userInfo());
-		setTimeout(() => {
-			dispatch(getUserPosts());
-		}, 1000);
 	}, []);
 
 	return (
@@ -61,7 +60,7 @@ const Profile = () => {
 			</div>
 
 			<div className='d-flex flex-wrap justify-content-center mt-4'>
-				<Post posts={userPosts} />
+				<Post posts={user.PostIds} />
 			</div>
 		</div>
 	);
