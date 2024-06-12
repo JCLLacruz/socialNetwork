@@ -10,6 +10,7 @@ const initialState = {
     isError: false,
     isSuccess: false,
     message: "",
+    users:[]
 };
 
 export const authSlice = createSlice({
@@ -54,6 +55,10 @@ export const authSlice = createSlice({
           })
           .addCase(userInfo.fulfilled, (state, action) => {
             state.user = action.payload.user;
+            state.isSuccess = true
+          })
+          .addCase(getUsers.fulfilled, (state, action) => {
+            state.users = action.payload.users;
             state.isSuccess = true
           })
           ;
@@ -108,9 +113,19 @@ export const userInfo = createAsyncThunk(
       } catch (error) {
           console.error(error);
       }
-  }
+  });
 
-);
+  export const getUsers = createAsyncThunk(
+    'auth/users',
+    async () => {
+        try {
+            return await authService.getUsers();
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
+  
 
 export const {reset} = authSlice.actions;
 
