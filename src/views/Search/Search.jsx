@@ -2,17 +2,21 @@ import React, { useEffect, useState } from 'react';
 import Post from '../../Components/Post/Post';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPost, getPostsByTitle } from '../../features/post/postSlice';
-import './Search.scss'
+import './Search.scss';
 import { Spin } from 'antd';
 
 const Search = () => {
 	const dispatch = useDispatch();
-	const {posts, isLoading} = useSelector((state) => state.post)
+	const { posts, isLoading } = useSelector((state) => state.post);
 	const [search, setSearch] = useState('');
 
-if (isLoading){
-	return <Spin/>
-}
+	if (isLoading) {
+		return (
+			<div className='sizeDiv'>
+				<Spin />
+			</div>
+		)
+	}
 
 	const handleSearch = (e) => {
 		setSearch(e.target.value);
@@ -27,11 +31,11 @@ if (isLoading){
 	return (
 		<>
 			<input className='w-100' type='text' name='search' placeholder='Search' onKeyUp={handleSearch} />
-      <div className='d-flex justify-content-center'>
-			<div className='postContainer'>
-					<Post className='post' posts={posts}/>
+			<div className='d-flex justify-content-center'>
+				<div className='postContainer'>
+					<Post className='post' posts={posts} />
+				</div>
 			</div>
-      </div>
 		</>
 	);
 };

@@ -6,6 +6,7 @@ import Post from '../../Components/Post/Post';
 import { Avatar, Badge, Modal, Spin } from 'antd';
 import { CommentOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import './PostDetail.scss';
+import Comments from '../Comments/Comments';
 
 const PostDetail = () => {
 	const initialValue = {
@@ -79,32 +80,30 @@ const PostDetail = () => {
 			<div>
 				<div className='d-flex justify-content-end gap-2'>
 					{post.UserId._id == user._id && (
-						<div className='gap-3'>
+						<div className='d-flex gap-3'>
 							<EditOutlined style={{ fontSize: '2em' }} onClick={() => showModal(post)} />
 							<DeleteOutlined style={{ fontSize: '2em', color: 'red' }} onClick={() => handleDeletePost()} />
 						</div>
 					)}
 				</div>
 			</div>
+			{post.image_path && (
+				<div className='post-image'>
+					<img src={post.image_path} alt={post.title} />
+				</div>
+			)}
 			<div className='post-header'>
 				<h2 className='post-title'>{post.title}</h2>
 			</div>
-			{post.image && (
-				<div className='post-image'>
-					<img src={post.image_path != 'nonPostImage'} alt={post.title} />
-				</div>
-			)}
 			<div className='post-body'>
 				<p>{post.body}</p>
 			</div>
-			<div className='post-comments'>
-				<Link to='/comments'>
-					<Badge count={post.CommentIds.length} style={{ backgroundColor: '#C38F37' }}>
-          <CommentOutlined style={{ fontSize: '2em' }} />
+			<div className='d-flex post-comments gap-2 justify-content-end'>
+					<Badge count={post.CommentIds.length} style={{ backgroundColor: '#FCAB1C' }}>
+						<CommentOutlined onClick={()=>navigate('/comments')}style={{ fontSize: '2em', color: '#FCAB1C' }} />
 					</Badge>
-				</Link>
 			</div>
-			<Modal title='Edit Product' visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+			<Modal title='Edit Product' open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
 				<form>
 					<div className='form-group'>
 						<label>Title</label>

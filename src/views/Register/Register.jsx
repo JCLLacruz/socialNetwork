@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../../features/auth/authSlice';
 import './Register.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, DatePicker } from 'antd';
 
 const Register = () => {
@@ -18,6 +18,7 @@ const Register = () => {
 
     const [formData, setFormData] = useState(initialValues);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onFinish = () => {
         const transformedValues = {
@@ -25,6 +26,7 @@ const Register = () => {
             birthday: formData.birthday ? formData.birthday.format('YYYY-MM-DD') : ''
         };
         dispatch(register(transformedValues));
+        navigate('/login');
     };
 
     const onValuesChange = (changedValues, allValues) => {

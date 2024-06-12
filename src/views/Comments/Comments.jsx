@@ -16,6 +16,8 @@ const Comments = () => {
 	useEffect(()=>{
 		dispatch(getPostById(post._id));
 	},[comment]);
+	
+	console.log('comment',comment);
 
 	const dispatch = useDispatch();
 
@@ -28,18 +30,19 @@ const Comments = () => {
 	};
 	const onFinish = () => {
 		dispatch(createComment({ ...formData, PostId: post._id }));
+		setFormData(initialValues);
 	};
 
 	return (
 		<div className='commentDiv'>
 			<div className=''>
-			<Comment post={post} />
+			<Comment post={post}/>
 			</div>
 			<div id='commentFormDiv'>
 			<Form  layout='vertical' onFinish={onFinish} initialValues={formData} onValuesChange={onValuesChange}>
 				<Form.Item name='body' rules={[{ required: true, message: 'Please insert your username.' }]}>
 					<div className='d-flex gap-2'>
-						<Input value={formData.username} placeholder='Please insert your username.' />
+						<Input value={formData.body} placeholder='Instert a comment.' />
 						<Button type='primary' htmlType='submit' className='d-flex align-items-center'>
 							<ArrowRightOutlined />
 						</Button>

@@ -50,6 +50,15 @@ export const commentSlice = createSlice({
 			.addCase(updateComment.rejected, (state, action) => {
 				state.message = action.payload.msg;
 				state.isError = true;
+			})
+			.addCase(deleteComment.fulfilled, (state, action) => {
+				state.comment = 'deleted';
+				state.message = action.payload.msg;
+				state.isSuccess = true;
+			})
+			.addCase(deleteComment.rejected, (state, action) => {
+				state.message = action.payload.msg;
+				state.isError = true;
 			});
 	},
 });
@@ -78,6 +87,13 @@ export const createComment = createAsyncThunk('comment/createComment', async (co
 export const updateComment = createAsyncThunk('comment/updateComment', async (comment) => {
 	try {
 		return await commentService.updateComment(comment);
+	} catch (error) {
+		console.error(error);
+	}
+});
+export const deleteComment = createAsyncThunk('comment/deleteComment', async (id) => {
+	try {
+		return await commentService.deleteComment(id);
 	} catch (error) {
 		console.error(error);
 	}
