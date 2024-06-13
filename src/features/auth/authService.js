@@ -68,6 +68,28 @@ const logout = async () => {
     const res=await axios.get(API_URL+"users/name/"+name)
     return res.data
   };
+  const getUserById = async (id) =>{
+    const res=await axios.get(API_URL+"users/id/"+id)
+    return res.data
+  };
+  const followUser = async (id) => {
+    const token = localStorage.getItem("token");
+    const res = await axios.put(API_URL + 'users/follow/' + id,{},{
+      headers: {
+        Authorization: token,
+      },
+    })
+    return res.data
+  }
+  const unfollowUser = async (id) => {
+    const token = localStorage.getItem("token");
+    const res = await axios.put(API_URL + 'users/unfollow/' + id,{},{
+      headers: {
+        Authorization: token,
+      },
+    })
+    return res.data
+  }
 
 
 const authService = {
@@ -77,7 +99,10 @@ const authService = {
     updateUser,
     userInfo,
     getUsers,
-    getUsersByName
+    getUsersByName,
+    getUserById,
+    followUser,
+    unfollowUser
 };
 
 export default authService;

@@ -2,19 +2,21 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserPosts } from '../../features/post/postSlice';
-import { userInfo } from '../../features/auth/authSlice';
+import { followUser, getUserById, unfollowUser, userInfo } from '../../features/auth/authSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile.scss';
 import Post from '../../Components/Post/Post';
 
 const Profile = () => {
 	const { user } = useSelector((state) => state.auth);
-	const { post } = useSelector((state) => state.post);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(userInfo());
-	}, [post]);
+	const localStorageUser = JSON.parse(localStorage.getItem('user'));
+
+	const onClickfollowUser = (id) => {
+		dispatch(followUser(id));
+	};
+	console.log(user);
 
 	return (
 		<div className='mt-3'>
@@ -22,7 +24,7 @@ const Profile = () => {
 				<div className='row'>
 					<div className='col'>
 						<div className='row'>
-							<span>PHOTO</span>
+							<img src={user.image_path} />
 							<span>{user.username}</span>
 						</div>
 					</div>
@@ -47,9 +49,19 @@ const Profile = () => {
 				</div>
 				<div className='row mt-5'>
 					<div className='col'>
-						<Link className='btn btn-primary' to='/editprofile'>
-							Edit Profile
-						</Link>
+						{localStorageUser._id == user._id ? (
+							<Link className='btn btn-primary' to='/editprofile'>
+								Edit Profile
+							</Link>
+						) : localStorageUser.FollowIds.includes(user._id) ? (
+							<button className='btn btn-primary' onClick={() => unfollowUser(user._id)}>
+								Unfollow
+							</button>
+						) : (
+							<button className='btn btn-primary' onClick={() => onClickfollowUser(user._id)}>
+								Follow
+							</button>
+						)}
 					</div>
 					<div className='col'>
 						<span>SHARE PROF</span>
@@ -58,7 +70,7 @@ const Profile = () => {
 			</div>
 
 			<div className='d-flex flex-wrap justify-content-center mt-4'>
-				<Post posts={user.PostIds} />
+				<Post posts={localStorageUser.PostIds} />
 			</div>
 		</div>
 	);
