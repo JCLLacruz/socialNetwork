@@ -4,19 +4,21 @@ import { getPostById } from '../../features/post/postSlice';
 import { Modal, Spin } from 'antd';
 import './Comment.scss';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { deleteComment, updateComment } from '../../features/comment/commentSlice';
+import { deleteComment, getAllComments, updateComment } from '../../features/comment/commentSlice';
 
 const Comment = ({ postId }) => {
 	const { user } = useSelector((state) => state.auth);
 	const { post, isLoading } = useSelector((state) => state.post);
+	const { comments } = useSelector((state) => state.comment);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (postId) {
 			dispatch(getPostById(postId));
 		}
+		dispatch(getAllComments())
 	}, [dispatch, postId]);
-
+	
 	const initialValue = {
 		body: '',
 	};
@@ -58,7 +60,8 @@ const Comment = ({ postId }) => {
 				reversedComments.map((comment) => (
 					<div id={comment._id} key={comment._id} className='d-flex justify-content-between commentDiv'>
 						<p>{comment.body}</p>
-						{post._id === comment.PostId && (
+						{console.log(user.CommentIds)}
+						{comment.UserId === user._id || post.UserId._id == user._id && (
 							<div className='d-flex flex-column justify-content-between align-items-start'>
 								<DeleteOutlined style={{ fontSize: '1rem', color: 'red' }} onClick={() => handleDeleteComment(comment._id)} />
 								<EditOutlined style={{ fontSize: '1rem' }} onClick={() => showModal(comment)} />

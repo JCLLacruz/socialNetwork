@@ -9,8 +9,6 @@ const Home = () => {
   const {posts, isLoading} = useSelector((state) => state.post)
   const dispatch = useDispatch();
 
-console.log('posts', posts);
-
   useEffect(()=>{
     dispatch(getAllPost());
   },[])
@@ -21,7 +19,7 @@ console.log('posts', posts);
 
   return (
     <div>
-      <Post posts={posts}/>
+      <span className='homePost'><Post posts={posts} /></span>
     </div>
   )
 }

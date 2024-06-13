@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'https://serversocialnetwork.onrender.com/';
+const API_URL = 'http://b.jertocvil.net:12000/';
 
 const getAllComments = async () => {
 	const token = localStorage.getItem('token');
-	const res = await axios.get(API_URL + '/',{
+	const res = await axios.get(API_URL + 'comments/',{
 		headers: {
 			Authorization: token,
 		},

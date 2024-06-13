@@ -12,12 +12,10 @@ const Comments = () => {
 	const { post } = useSelector((state) => state.post);
 	const { comment } = useSelector((state) => state.comment);
 
-	console.log('post', post);
 	useEffect(()=>{
 		dispatch(getPostById(post._id));
 	},[comment]);
 	
-	console.log('comment',comment);
 
 	const dispatch = useDispatch();
 

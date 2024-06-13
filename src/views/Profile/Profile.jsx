@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserPosts } from '../../features/post/postSlice';
 import { userInfo } from '../../features/auth/authSlice';
@@ -9,14 +9,12 @@ import Post from '../../Components/Post/Post';
 
 const Profile = () => {
 	const { user } = useSelector((state) => state.auth);
+	const { post } = useSelector((state) => state.post);
 	const dispatch = useDispatch();
-	const location = useLocation();
-
-console.log(user);
 
 	useEffect(() => {
 		dispatch(userInfo());
-	}, []);
+	}, [post]);
 
 	return (
 		<div className='mt-3'>

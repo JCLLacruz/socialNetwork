@@ -29,9 +29,6 @@ const PostDetail = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	console.log('post', post);
-	console.log('user', user);
-
 	if (isLoading) {
 		return (
 			<div id='spinDiv' className='d-flex justify-content-center align-items-center'>

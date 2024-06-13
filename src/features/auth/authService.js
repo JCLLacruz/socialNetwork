@@ -1,14 +1,14 @@
 import axios from "axios"
 
-const API_URL = 'https://serversocialnetwork.onrender.com';
+const API_URL = 'http://b.jertocvil.net:12000/';
 
 const register = async (userData) => {
-    const res = await axios.post(API_URL + '/users', userData);
+    const res = await axios.post(API_URL + 'users', userData);
     return res.data;
 };
 
 const login = async(userData)=>{
-    const res = await axios.post(API_URL + '/users/login',userData)
+    const res = await axios.post(API_URL + 'users/login',userData)
     if (res.data) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("token", res.data.token);       
@@ -18,7 +18,7 @@ const login = async(userData)=>{
 
 const logout = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.delete(API_URL + "/users/logout", {
+    const res = await axios.delete(API_URL + "users/logout", {
       headers: {
         Authorization: token,
       },
@@ -31,7 +31,7 @@ const logout = async () => {
 
   const updateUser = async (userData) => {
     const token = localStorage.getItem("token");
-    const res = await axios.put(API_URL + "/users/updateuser",userData,{
+    const res = await axios.put(API_URL + "users/updateuser",userData,{
       headers: {
         Authorization: token,
       }
@@ -44,7 +44,7 @@ const logout = async () => {
 
   const userInfo = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get(API_URL + "/users/userinfo", {
+    const res = await axios.get(API_URL + "users/userinfo", {
       headers: {
         Authorization: token,
       },

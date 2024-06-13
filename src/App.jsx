@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Register from './views/Register/Register';
 import Login from './views/Login/Login';
 import Home from './views/Home/Home';
@@ -16,18 +16,21 @@ import PrivateZone from './guards/PrivateZone';
 
 function App() {
 	const { user } = useSelector((state) => state.auth);
+	const location = useLocation();
+console.log((location.pathname));
 	return (
 		<>
-			<BrowserRouter>
 				{!user ? (
 					<>
 						<Routes>
-						<Route path='/' element={<Login />}/>
-						<Route path='/register' element={<Register />} />
+							<Route path='/' element={<Login />} />
+							<Route path='/register' element={<Register />} />
 						</Routes>
 					</>
 				) : (
 					<>
+					{location.pathname == "/" && <Navigate to='/home' />}
+						
 						<Header />
 						<Routes>
 							<Route
@@ -90,7 +93,6 @@ function App() {
 						<Footer />
 					</>
 				)}
-			</BrowserRouter>
 		</>
 	);
 }

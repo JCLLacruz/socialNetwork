@@ -22,6 +22,7 @@ export const commentSlice = createSlice({
 		builder
 			.addCase(getAllComments.fulfilled, (state, action) => {
 				state.comments = action.payload.comments;
+				console.log('action',action.payload);
 				state.message = action.payload.msg;
 				state.isSuccess = true;
 				state.isLoading = false;

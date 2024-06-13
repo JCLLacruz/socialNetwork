@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://serversocialnetwork.onrender.com/';
+const API_URL = 'http://b.jertocvil.net:12000/';
 
 const getAllPost = async () => {
 	const token = localStorage.getItem('token');
