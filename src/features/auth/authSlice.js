@@ -12,6 +12,7 @@ const initialState = {
     message: "",
     users:[],
     otherUser: false,
+    followOrUnfollow:'',
 };
 
 export const authSlice = createSlice({
@@ -72,10 +73,12 @@ export const authSlice = createSlice({
             state.otherUser= true;
           })
           .addCase(followUser.fulfilled, (state, action) => {
+            state.followOrUnfollow = 'follow'
             state.message = action.payload.msg
             state.isSuccess = true;
           })
           .addCase(unfollowUser.fulfilled, (state, action) => {
+            state.followOrUnfollow = 'unfollow'
             state.message = action.payload.msg
             state.isSuccess = true;
           })

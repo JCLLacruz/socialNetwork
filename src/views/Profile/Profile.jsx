@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserPosts } from '../../features/post/postSlice';
 import { followUser, getUserById, unfollowUser, userInfo } from '../../features/auth/authSlice';
@@ -8,16 +8,27 @@ import './Profile.scss';
 import Post from '../../Components/Post/Post';
 
 const Profile = () => {
-	const { user } = useSelector((state) => state.auth);
+	const { id:paramId } = useParams();
+	const { user, followOrUnfollow } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 
 	const localStorageUser = JSON.parse(localStorage.getItem('user'));
 
 	const onClickfollowUser = (id) => {
 		dispatch(followUser(id));
+		dispatch(getUserById(paramId))
 	};
-	console.log(user);
+	const onClickunfollowUser = (id) => {
+		dispatch(unfollowUser(id))
+		dispatch(getUserById(paramId))
+	}
 
+	useEffect(()=>{
+		dispatch(getUserById(paramId))
+	},[followOrUnfollow])
+
+	const followerIds = user.FollowerIds ? user.FollowerIds.map(follower => follower._id) : [];
+	const isFollowing = followerIds.includes(localStorageUser._id);
 	return (
 		<div className='mt-3'>
 			<div className='container text-center'>
@@ -53,8 +64,8 @@ const Profile = () => {
 							<Link className='btn btn-primary' to='/editprofile'>
 								Edit Profile
 							</Link>
-						) : localStorageUser.FollowIds.includes(user._id) ? (
-							<button className='btn btn-primary' onClick={() => unfollowUser(user._id)}>
+						) : isFollowing ? (
+							<button className='btn btn-primary' onClick={() => onClickunfollowUser(user._id)}>
 								Unfollow
 							</button>
 						) : (
@@ -70,7 +81,7 @@ const Profile = () => {
 			</div>
 
 			<div className='d-flex flex-wrap justify-content-center mt-4'>
-				<Post posts={localStorageUser.PostIds} />
+				<Post posts={user.PostIds} />
 			</div>
 		</div>
 	);

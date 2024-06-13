@@ -11,7 +11,7 @@ const User = ({users}) => {
 
 	const onClick = (id) => {
 		dispatch(getUserById(id));
-		navigate('/profile');
+		navigate('/profile/'+ id);
 	}
 	return (
 		<>

@@ -15,7 +15,6 @@ const PostDetail = () => {
 		body: '',
 		image_path: '',
 	};
-	const { id } = useParams();
 	const { posts, post, isLoading } = useSelector((state) => state.post);
 	const { user } = useSelector((state) => state.auth);
 	const [isModalOpen, setIsModalOpen] = useState(false);
