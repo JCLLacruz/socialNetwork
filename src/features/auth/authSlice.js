@@ -61,6 +61,10 @@ export const authSlice = createSlice({
             state.users = action.payload.users;
             state.isSuccess = true
           })
+          .addCase(getUsersByName.fulfilled, (state, action) => {
+            state.users = action.payload.user;
+            state.isSuccess = true
+          })
           ;
       },
 });
@@ -124,6 +128,16 @@ export const userInfo = createAsyncThunk(
             console.error(error);
         }
     });
+
+    export const getUsersByName = createAsyncThunk(
+      'auth/usersbyname',
+      async (name) => {
+          try {
+              return await authService.getUsersByName(name);
+          } catch (error) {
+              console.error(error);
+          }
+      });
 
   
 
