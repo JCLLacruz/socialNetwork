@@ -57,7 +57,7 @@ const logout = async () => {
 
   const getUsers = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get(API_URL + "/users/getallusers", {
+    const res = await axios.get(API_URL + "users/getallusers", {
       headers: {
         Authorization: token,
       },
@@ -65,7 +65,7 @@ const logout = async () => {
     return res.data
   };
   const getUsersByName = async (name) =>{
-    const res=await axios.get(API_URL+"/users/name/"+name)
+    const res=await axios.get(API_URL+"users/name/"+name)
     return res.data
   };
 
