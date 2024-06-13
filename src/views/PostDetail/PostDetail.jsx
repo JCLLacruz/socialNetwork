@@ -19,6 +19,9 @@ const PostDetail = () => {
 	const { user } = useSelector((state) => state.auth);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
+	const localStorageUser = JSON.parse(localStorage.getItem('user'));
+
+
 	const [formData, setFormData] = useState(initialValue);
 
 	const handleFileChange = async (e) => {
@@ -30,7 +33,7 @@ const PostDetail = () => {
 	
 	const handleDeletePost = () => {
 		dispatch(deletePost(post._id));
-		navigate('/profile');
+		navigate('/profile/' + localStorageUser._id);
 	};
 
 	const showModal = (post) => {
@@ -71,9 +74,6 @@ const PostDetail = () => {
 			</div>
 		);
 	}
-
-const localStorageUser = JSON.parse(localStorage.getItem('user'));
-
 
 	return (
 		<div id='postDetailDiv'>

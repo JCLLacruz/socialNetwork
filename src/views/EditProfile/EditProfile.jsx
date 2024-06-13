@@ -19,6 +19,8 @@ export const EditProfile = () => {
 
 	const { username, birthday, firstname, lastname} = formData;
 
+    const localStorageUser = JSON.parse(localStorage.getItem('user'));
+
 	const dispatch = useDispatch();
     const navigate = useNavigate()
 
@@ -43,7 +45,7 @@ export const EditProfile = () => {
         newUserFormData.append('image_path', file);
         newUserFormData.append('birthday', birthday);
 		dispatch(updateUser(newUserFormData));
-        navigate("/profile/"+user._id)
+        navigate("/profile/"+ localStorageUser._id)
         
     }
 
