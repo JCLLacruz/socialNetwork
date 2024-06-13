@@ -15,6 +15,7 @@ export const EditProfile = () => {
 	};
 
     const [formData, setFormdata] = useState(initialValues);
+    const [file, setFile] = useState(null);
 
 	const { username, birthday, firstname, lastname} = formData;
 
@@ -29,10 +30,20 @@ export const EditProfile = () => {
 		});
 	};
 
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
 	const onSubmit = (e) => {
 		e.preventDefault();
-		dispatch(updateUser(formData));
-        navigate("/profile")
+        const newUserFormData = new FormData();
+        newUserFormData.append('username', username);
+        newUserFormData.append('firstname', firstname);
+        newUserFormData.append('lastname', lastname);
+        newUserFormData.append('image_path', file);
+        newUserFormData.append('birthday', birthday);
+		dispatch(updateUser(newUserFormData));
+        navigate("/profile/"+user._id)
         
     }
 
@@ -54,6 +65,15 @@ export const EditProfile = () => {
             <div className='d-flex justify-content-between'>
                 <label htmlFor='firstnameInput'>Birthday: </label>
                 <input type='date' id='firstnameInput' name='birthday' value={birthday} onChange={onChange} placeholder='Please insert your birthday.' />
+            </div>
+            <div className='d-flex flex-column'>
+                <label htmlFor='profileImage'>Profile Image</label>
+                <input 
+                    type='file' 
+                    id='profileImage' 
+                    name='image_path' 
+                    onChange={handleFileChange} 
+                />
             </div>
             <div>
             <input type="submit" value='Submit' className='btn btn-primary'/>

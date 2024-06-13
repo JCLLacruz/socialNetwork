@@ -35,7 +35,11 @@ const Profile = () => {
 				<div className='row'>
 					<div className='col'>
 						<div className='row'>
-							<img src={user.image_path} />
+							<img src={user.image_path} style={{
+										borderRadius: "100%",
+										background: "white",
+										display: "block"
+									}}/>
 							<span>{user.username}</span>
 						</div>
 					</div>
@@ -79,7 +83,6 @@ const Profile = () => {
 					</div>
 				</div>
 			</div>
-
 			<div className='d-flex flex-wrap justify-content-center mt-4'>
 				<Post posts={user.PostIds} />
 			</div>
