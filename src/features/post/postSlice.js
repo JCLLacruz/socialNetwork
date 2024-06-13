@@ -11,7 +11,7 @@ const initialState = {
 	isSuccess: false,
 	message: '',
 	isError: false,
-	isLoading: true
+	isLoading: true,
 };
 
 export const postSlice = createSlice({
