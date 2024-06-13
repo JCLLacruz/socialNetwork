@@ -81,7 +81,7 @@ const Profile = () => {
 			</div>
 
 			<div className='d-flex flex-wrap justify-content-center mt-4'>
-				<Post posts={user.PostIds} />
+				<Post posts={user.PostIds} from='profile'/>
 			</div>
 		</div>
 	);

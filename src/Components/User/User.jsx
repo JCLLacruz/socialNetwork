@@ -17,7 +17,7 @@ const User = ({users}) => {
 		<>
 			{users.map((user) => {
 				return (
-					<div className='post' onClick={()=> onClick(user._id)} key={user._id}>
+					<div className='user' onClick={()=> onClick(user._id)} key={user._id}>
 						{user.image_path != 'nonUserImage' && (
 							<div className='user-image'>
 								<img src={user.image_path} alt={user.username} />
@@ -25,10 +25,6 @@ const User = ({users}) => {
 						)}
 						<div className='user-header'>
 							<h2 className='user-title'>{user.username}</h2>
-						</div>
-						<div className='user-body'>
-							<p>{user.firstname}</p>
-              <button className='btn primary'></button>
 						</div>
 					</div>
 				);

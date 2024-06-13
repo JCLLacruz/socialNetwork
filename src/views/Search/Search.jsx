@@ -45,7 +45,7 @@ const Search = () => {
 			<input className='w-100' type='text' name='search' placeholder='Search' onKeyUp={handleSearchPost} />
 			<div className='d-flex justify-content-center'>
 				<div className='postContainer'>
-					<Post posts={posts} />
+					<Post posts={posts} from='search'/>
 				</div>
 			</div>
 			<h3 className='mt-3'>Find new friends </h3>
@@ -53,7 +53,7 @@ const Search = () => {
 
 			<div className='d-flex justify-content-center'>
 				<div className='postContainer'>
-					<User users={users} />
+					<User users={users} from='search'/>
 				</div>
 			</div>
 		</>
