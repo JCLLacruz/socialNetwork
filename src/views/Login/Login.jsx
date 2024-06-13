@@ -23,7 +23,9 @@ const Login = () => {
 			dispatch(reset());
 		}
 		return () => {
+			console.log('1');
 			if (isSuccess) {
+				console.log('2');
 				notification.success({ message: 'Success', description: message });
 				navigate('/home');
 				dispatch(reset());

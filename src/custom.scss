@@ -10,7 +10,7 @@ $info: #0585E0;
 $warning: #c983c9;
 $danger: #e74a3b;
 $light: #f8f9fc;
-$dark: #5a5c69;
+$dark: #141415;
 
 $body-bg: $light;
 $body-color: $dark;
@@ -44,6 +44,13 @@ $theme-colors: (
 	justify-content: center;
 	height: 100vh;
 	align-items: center;
+}
+.ant-form {
+	margin: 0;
+	width: 100%;
+}
+.ant-input {
+	width: 90%;
 }
 // Required
 @import '../node_modules/bootstrap/scss/functions';

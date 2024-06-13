@@ -11,13 +11,14 @@ const Home = () => {
 
 console.log('posts', posts);
 
+  useEffect(()=>{
+    dispatch(getAllPost());
+  },[])
+
   if(isLoading){
     return <Spin/>
   }
 
-  useEffect(()=>{
-    dispatch(getAllPost);
-  },[])
   return (
     <div>
       <Post posts={posts}/>
