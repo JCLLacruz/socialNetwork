@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserPosts } from '../../features/post/postSlice';
-import { getUserById, unfollowUser, userInfo } from '../../features/auth/authSlice';
+import { followUser, getUserById, unfollowUser, userInfo } from '../../features/auth/authSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile.scss';
 import Post from '../../Components/Post/Post';
@@ -13,9 +13,8 @@ const Profile = () => {
 
 	const localStorageUser = JSON.parse(localStorage.getItem('user'));
 
-	const followUser = (id) => {
+	const onClickfollowUser = (id) => {
 		dispatch(followUser(id));
-		dispatch(userInfo());
 	};
 	console.log(user);
 
@@ -54,12 +53,12 @@ const Profile = () => {
 							<Link className='btn btn-primary' to='/editprofile'>
 								Edit Profile
 							</Link>
-						) : localStorageUser.FollowIds.include(user._id) ? (
+						) : localStorageUser.FollowIds.includes(user._id) ? (
 							<button className='btn btn-primary' onClick={() => unfollowUser(user._id)}>
 								Unfollow
 							</button>
 						) : (
-							<button className='btn btn-primary' onClick={() => followUser(user._id)}>
+							<button className='btn btn-primary' onClick={() => onClickfollowUser(user._id)}>
 								Follow
 							</button>
 						)}
