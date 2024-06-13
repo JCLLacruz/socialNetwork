@@ -60,7 +60,7 @@ const Comment = ({ postId }) => {
 				reversedComments.map((comment) => (
 					<div id={comment._id} key={comment._id} className='d-flex justify-content-between commentDiv'>
 						<p>{comment.body}</p>
-						{(comment.UserId === localStorageUser._id || post.UserId._id == localStorageUser._id) && (
+						{(comment.UserId == localStorageUser._id || post.UserId._id == localStorageUser._id) && (
 							<div className='d-flex flex-column justify-content-between align-items-start'>
 								<DeleteOutlined style={{ fontSize: '1rem', color: 'red' }} onClick={() => handleDeleteComment(comment._id)} />
 								<EditOutlined style={{ fontSize: '1rem' }} onClick={() => showModal(comment)} />

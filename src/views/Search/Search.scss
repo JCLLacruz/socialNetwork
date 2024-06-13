@@ -4,11 +4,35 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2px;
-    width: 90%;
-    margin-top: 1rem;
+    width: 100%;
 }
 
-.containerSize {
+.user,
+.search {
     width: 32.90%;
-    height: 9rem;
-} 
+    height: 10rem !important;
+}
+.search-container {
+    display: flex;
+    flex-direction: column;
+    height: 93vh;
+  }
+  
+  .search-section {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .search-section h3 {
+    margin-top: 0;
+  }
+  
+  .postContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
