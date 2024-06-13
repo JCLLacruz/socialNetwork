@@ -64,6 +64,10 @@ const logout = async () => {
     });
     return res.data
   };
+  const getUsersByName = async (name) =>{
+    const res=await axios.get(API_URL+"/users/name/"+name)
+    return res.data
+  };
 
 
 const authService = {
@@ -72,7 +76,8 @@ const authService = {
     logout,
     updateUser,
     userInfo,
-    getUsers
+    getUsers,
+    getUsersByName
 };
 
 export default authService;
