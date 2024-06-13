@@ -3,12 +3,11 @@ import { useDispatch } from 'react-redux';
 import { register } from '../../features/auth/authSlice';
 import './Register.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, DatePicker } from 'antd';
 
 const Register = () => {
     const initialValues = {
         username: '',
-        birthday: null,
+        birthday: '',
         firstname: '',
         lastname: '',
         email: '',
@@ -17,106 +16,153 @@ const Register = () => {
     };
 
     const [formData, setFormData] = useState(initialValues);
+    const [file, setFile] = useState(null);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const onFinish = () => {
-        const transformedValues = {
+    const { username, birthday, firstname, lastname, email, password, repeatPassword } = formData;
+
+    const onChange = (e) => {
+        setFormData({
             ...formData,
-            birthday: formData.birthday ? formData.birthday.format('YYYY-MM-DD') : ''
-        };
-        dispatch(register(transformedValues));
-        navigate('/login');
+            [e.target.name]: e.target.value,
+        });
     };
 
-    const onValuesChange = (changedValues, allValues) => {
-        setFormData(allValues);
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (password !== repeatPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+        const newUserFormData = new FormData();
+        newUserFormData.append('username', username);
+        newUserFormData.append('firstname', firstname);
+        newUserFormData.append('lastname', lastname);
+        newUserFormData.append('email', email);
+        newUserFormData.append('password', password);
+        newUserFormData.append('image_path', file);
+        newUserFormData.append('birthday', birthday);
+        dispatch(register(newUserFormData));
+        navigate('/');
     };
 
     return (
         <div id='registerDiv'>
             <h2 className='mb-2'>Register</h2>
-            <Form
-                layout='vertical'
-                onFinish={onFinish}
-                initialValues={formData}
-                onValuesChange={onValuesChange}
-            >
-                <Form.Item
-                    label='Username'
-                    name='username'
-                    rules={[{ required: true, message: 'Please insert your username.' }]}
-                >
-                    <Input value={formData.username} placeholder='Please insert your username.' />
-                </Form.Item>
-                <Form.Item
-                    label='Email'
-                    name='email'
-                    rules={[{ required: true, type: 'email', message: 'Please insert a valid email.' }]}
-                >
-                    <Input value={formData.email} placeholder='Please insert your email.' />
-                </Form.Item>
-                <Form.Item
-                    label='Firstname'
-                    name='firstname'
-                    rules={[{ required: true, message: 'Please insert your firstname.' }]}
-                >
-                    <Input value={formData.firstname} placeholder='Please insert your firstname.' />
-                </Form.Item>
-                <Form.Item
-                    label='Lastname'
-                    name='lastname'
-                    rules={[{ required: true, message: 'Please insert your lastname.' }]}
-                >
-                    <Input value={formData.lastname} placeholder='Please insert your lastname.' />
-                </Form.Item>
-                <Form.Item
-                    label='Birthday'
-                    name='birthday'
-                    rules={[{ required: true, message: 'Please insert your birthday.' }]}
-                >
-                    <DatePicker
-                        value={formData.birthday}
-                        format='YYYY-MM-DD'
-                        onChange={(date) => setFormData({ ...formData, birthday: date })}
+            <form onSubmit={onSubmit}>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='username'>Username</label>
+                    <input 
+                        type='text' 
+                        id='username' 
+                        name='username' 
+                        value={username} 
+                        onChange={onChange} 
+                        placeholder='Please insert your username.' 
+                        required 
                     />
-                </Form.Item>
-                <Form.Item
-                    label='Password'
-                    name='password'
-                    rules={[{ required: true, message: 'Please insert your password.' }]}
-                    hasFeedback
-                >
-                    <Input.Password value={formData.password} placeholder='Please insert your password.' />
-                </Form.Item>
-                <Form.Item
-                    label='Repeat Password'
-                    name='repeatPassword'
-                    dependencies={['password']}
-                    hasFeedback
-                    rules={[
-                        { required: true, message: 'Please repeat your password.' },
-                        ({ getFieldValue }) => ({
-                            validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject(new Error('The two passwords do not match.'));
-                            },
-                        }),
-                    ]}
-                >
-                    <Input.Password value={formData.repeatPassword} placeholder='Please repeat your password.' />
-                </Form.Item>
-                <Form.Item>
-                    <Button type='primary' htmlType='submit'>Submit</Button>
-                    <Button type='default' onClick={() => setFormData(initialValues)}>Clear</Button>
-                </Form.Item>
-                <Form.Item>
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='email'>Email</label>
+                    <input 
+                        type='email' 
+                        id='email' 
+                        name='email' 
+                        value={email} 
+                        onChange={onChange} 
+                        placeholder='Please insert your email.' 
+                        required 
+                    />
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='firstname'>Firstname</label>
+                    <input 
+                        type='text' 
+                        id='firstname' 
+                        name='firstname' 
+                        value={firstname} 
+                        onChange={onChange} 
+                        placeholder='Please insert your firstname.' 
+                        required 
+                    />
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='lastname'>Lastname</label>
+                    <input 
+                        type='text' 
+                        id='lastname' 
+                        name='lastname' 
+                        value={lastname} 
+                        onChange={onChange} 
+                        placeholder='Please insert your lastname.' 
+                        required 
+                    />
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='birthday'>Birthday</label>
+                    <input 
+                        type='date' 
+                        id='birthday' 
+                        name='birthday' 
+                        value={birthday} 
+                        onChange={onChange} 
+                        required 
+                    />
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='password'>Password</label>
+                    <input 
+                        type='password' 
+                        id='password' 
+                        name='password' 
+                        value={password} 
+                        onChange={onChange} 
+                        placeholder='Please insert your password.' 
+                        required 
+                    />
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='repeatPassword'>Repeat Password</label>
+                    <input 
+                        type='password' 
+                        id='repeatPassword' 
+                        name='repeatPassword' 
+                        value={repeatPassword} 
+                        onChange={onChange} 
+                        placeholder='Please repeat your password.' 
+                        required 
+                    />
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='profileImage'>Profile Image</label>
+                    <input 
+                        type='file' 
+                        id='profileImage' 
+                        name='image_path' 
+                        onChange={handleFileChange} 
+                    />
+                </div>
+                <div className='d-flex flex-column'>
                     <h6>Do you have an account?</h6>
                     <Link to='/'>Login</Link>
-                </Form.Item>
-            </Form>
+                </div>
+                <div className='d-flex flex-column'>
+                    <button type='submit' className='btn btn-primary mt-2'>Submit</button>
+                    <button 
+                        type='button' 
+                        className='btn btn-secondary mt-2' 
+                        onClick={() => setFormData(initialValues)}
+                    >
+                        Clear
+                    </button>
+                </div>
+            </form>
         </div>
     );
 };

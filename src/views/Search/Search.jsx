@@ -16,15 +16,13 @@ const Search = () => {
 
 	useEffect(() => {
 		dispatch(getUsers());
-	});
+		dispatch(getAllPost());
+	},[]);
 
 	const handleSearchPost = (e) => {
 		setSearch(e.target.value);
 		if (e.key == 'Enter') {
-			dispatch(getPostsByTitle(search));
-			if (search == '') {
-				dispatch(getAllPost());
-			}
+			search == '' ? 		dispatch(getAllPost()) : dispatch(getPostsByTitle(search));
 		}
 	};
 

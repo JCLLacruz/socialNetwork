@@ -10,7 +10,8 @@ const initialState = {
     isError: false,
     isSuccess: false,
     message: "",
-    users:[]
+    users:[],
+    otherUser: false,
 };
 
 export const authSlice = createSlice({
@@ -62,10 +63,23 @@ export const authSlice = createSlice({
             state.isSuccess = true
           })
           .addCase(getUsersByName.fulfilled, (state, action) => {
-            state.users = action.payload.user;
+            state.user = action.payload.user;
             state.isSuccess = true
           })
-          ;
+          .addCase(getUserById.fulfilled, (state, action) => {
+            state.user = action.payload.user;
+            state.isSuccess = true;
+            state.otherUser= true;
+          })
+          .addCase(followUser.fulfilled, (state, action) => {
+            state.message = action.payload.msg
+            state.isSuccess = true;
+          })
+          .addCase(unfollowUser.fulfilled, (state, action) => {
+            state.message = action.payload.msg
+            state.isSuccess = true;
+          })
+          
       },
 });
 
@@ -134,6 +148,33 @@ export const userInfo = createAsyncThunk(
       async (name) => {
           try {
               return await authService.getUsersByName(name);
+          } catch (error) {
+              console.error(error);
+          }
+      });
+    export const getUserById = createAsyncThunk(
+      'auth/getuserbyid',
+      async (id) => {
+          try {
+              return await authService.getUserById(id);
+          } catch (error) {
+              console.error(error);
+          }
+      });
+    export const followUser = createAsyncThunk(
+      'auth/followuser',
+      async (id) => {
+          try {
+              return await authService.followUser(id);
+          } catch (error) {
+              console.error(error);
+          }
+      });
+    export const unfollowUser = createAsyncThunk(
+      'auth/unfollowuser',
+      async (id) => {
+          try {
+              return await authService.unfollowUser(id);
           } catch (error) {
               console.error(error);
           }

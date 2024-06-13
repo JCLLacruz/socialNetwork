@@ -28,14 +28,7 @@ const PostDetail = () => {
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
-	if (isLoading) {
-		return (
-			<div id='spinDiv' className='d-flex justify-content-center align-items-center'>
-				<Spin />
-			</div>
-		);
-	}
+	
 	const handleDeletePost = () => {
 		dispatch(deletePost(post._id));
 		navigate('/profile');
@@ -72,11 +65,22 @@ const PostDetail = () => {
 		navigate('/profile');
 	};
 
+	if (isLoading) {
+		return (
+			<div id='spinDiv' className='d-flex justify-content-center align-items-center'>
+				<Spin />
+			</div>
+		);
+	}
+
+const localStorageUser = JSON.parse(localStorage.getItem('user'));
+
+
 	return (
 		<div id='postDetailDiv'>
 			<div>
 				<div className='d-flex justify-content-end gap-2'>
-					{post.UserId._id == user._id && (
+					{post.UserId._id == localStorageUser._id && (
 						<div className='d-flex gap-3'>
 							<EditOutlined style={{ fontSize: '2em' }} onClick={() => showModal(post)} />
 							<DeleteOutlined style={{ fontSize: '2em', color: 'red' }} onClick={() => handleDeletePost()} />
@@ -109,10 +113,6 @@ const PostDetail = () => {
 					<div className='form-group'>
 						<label>Content</label>
 						<input type='text' className='form-control' name='body' value={formData.body} onChange={onChange} />
-					</div>
-					<div className='d-flex flex-column'>
-						<label htmlFor='titleInput'>Post Image</label>
-						<input className='mt-2' type='file' name='image' id='titleInput' onChange={handleFileChange} />
 					</div>
 				</form>
 			</Modal>

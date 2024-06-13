@@ -17,7 +17,6 @@ import PrivateZone from './guards/PrivateZone';
 function App() {
 	const { user } = useSelector((state) => state.auth);
 	const location = useLocation();
-console.log((location.pathname));
 	return (
 		<>
 				{!user ? (
@@ -30,7 +29,6 @@ console.log((location.pathname));
 				) : (
 					<>
 					{location.pathname == "/" && <Navigate to='/home' />}
-						
 						<Header />
 						<Routes>
 							<Route
