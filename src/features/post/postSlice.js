@@ -85,7 +85,12 @@ export const postSlice = createSlice({
 			.addCase(getUserPosts.fulfilled, (state, action) => {
 				state.message = action.payload.msg;
 				state.userPosts = action.payload.posts;
-			});
+			})
+			.addCase(addLike.fulfilled, (state, action) => {
+			 	state.message = action.payload.msg;
+			 	state.post = action.payload.post;
+			})
+			;
 	},
 });
 
@@ -135,6 +140,15 @@ export const deletePost = createAsyncThunk('post/deletePost', async (id) => {
 export const getUserPosts = createAsyncThunk('post/userPosts', async () => {
 	try {
 		return await postService.getUserPosts();
+	} catch (error) {
+		console.error(error);
+	}
+});
+
+export const addLike = createAsyncThunk('post/addLike', async (postId) => {
+	console.log('like2', postId)
+	try {
+		return await postService.addLike(postId);
 	} catch (error) {
 		console.error(error);
 	}

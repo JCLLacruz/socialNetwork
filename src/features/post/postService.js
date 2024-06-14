@@ -65,7 +65,19 @@ const updatePost = async (postData) => {
 
 const getUserPosts = async () => {
 	const token = localStorage.getItem('token');
-	const res = await axios.get(API_URL + 'posts/userposts',{
+	const res = await axios.gputet(API_URL + 'posts/userposts',{
+		headers: {
+			Authorization: token,
+		},
+	}
+);
+	return res.data;
+};
+
+const addLike = async (postId) => {
+	console.log('like 3 : ', postId)
+	const token = localStorage.getItem('token');
+	const res = await axios.put(API_URL + 'posts/like/'+postId,{
 		headers: {
 			Authorization: token,
 		},
@@ -81,7 +93,8 @@ const postService = {
 	getPostById,
 	getPostsByTitle,
 	getUserPosts,
-	deletePost
+	deletePost,
+	addLike,
 };
 
 export default postService;

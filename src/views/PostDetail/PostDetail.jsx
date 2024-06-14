@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
-import { deletePost, getPostById, getPostsByTitle, updatePost } from '../../features/post/postSlice';
+import { deletePost, getPostById, getPostsByTitle, updatePost,addLike } from '../../features/post/postSlice';
 import Post from '../../Components/Post/Post';
 import { Avatar, Badge, Modal, Spin } from 'antd';
-import { CommentOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { CommentOutlined, DeleteOutlined, EditOutlined,HeartOutlined, HeartFilled} from '@ant-design/icons';
 import './PostDetail.scss';
 import Comments from '../Comments/Comments';
 
@@ -66,7 +66,13 @@ const PostDetail = () => {
 		dispatch(updatePost({ ...formData, _id: post._id }));
 		navigate('/profile');
 	};
-
+	const addLikePost = ()=>{
+		console.log('like');
+		dispatch(addLike(post._id))
+	}
+	
+	console.log('post',post)
+	
 	if (isLoading) {
 		return (
 			<div id='spinDiv' className='d-flex justify-content-center align-items-center'>
@@ -99,6 +105,9 @@ const PostDetail = () => {
 				<p>{post.body}</p>
 			</div>
 			<div className='d-flex post-comments gap-2 justify-content-end'>
+					<Badge count={post.LikeIds.length} style={{ backgroundColor: '#FCAB1C' }}>
+						<HeartOutlined onClick={()=>addLikePost()} style={{ fontSize: '2em', color: '#FCAB1C'}}/>
+					</Badge>
 					<Badge count={post.CommentIds.length} style={{ backgroundColor: '#FCAB1C' }}>
 						<CommentOutlined onClick={()=>navigate('/comments')}style={{ fontSize: '2em', color: '#FCAB1C' }} />
 					</Badge>
