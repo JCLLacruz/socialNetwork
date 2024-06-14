@@ -14,6 +14,7 @@ const Post = () => {
 	const [file, setFile] = useState(null);
 
 	const { title, body } = postData;
+	const localStorageUser = JSON.parse(localStorage.getItem('user'));
 
 	const dispatch = useDispatch();
 
@@ -36,7 +37,7 @@ const Post = () => {
 		formData.append('body', body);
 		formData.append('image_path', file);
 		dispatch(createPost(formData));
-		navigate("/profile")
+		navigate("/profile/" + localStorageUser._i)
 	};
 
 	return (
